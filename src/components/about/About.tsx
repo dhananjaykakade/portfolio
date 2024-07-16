@@ -1,6 +1,6 @@
 import React from "react";
-import IconCloud from "../Cloud/Cloud";
-import { IconCloudDemo } from "../magicui/IconGlobe";
+import IconCloud from "../Cloud/Cloud.tsx";
+import { IconCloudDemo } from "../magicui/IconGlobe.tsx";
 import { IoLogoJavascript } from "react-icons/io5";
 import { SiTypescript } from "react-icons/si";
 import { SiMongodb } from "react-icons/si";

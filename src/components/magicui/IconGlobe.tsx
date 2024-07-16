@@ -1,4 +1,4 @@
-import IconCloud from '../Cloud/Cloud'
+import IconCloud from '../Cloud/Cloud.tsx'
 
 const slugs = [
     "typescript",

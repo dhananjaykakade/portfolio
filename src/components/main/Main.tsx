@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import TypingAnimation from "../magicui/typing-animation";
+import TypingAnimation from "../magicui/typing-animation.tsx";
 
 import IconCloud from "../Cloud/Cloud";
-import ParticlesDemo from "../magicui/particlesDemo";
+import ParticlesDemo from "../magicui/particlesDemo.tsx";
 
 const Main: FC = () => {
   return (

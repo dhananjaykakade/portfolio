@@ -2,7 +2,7 @@ import React from "react";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
-import { Dock, DockIcon } from "../magicui/dock";
+import { Dock, DockIcon } from "../magicui/dock.tsx";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 

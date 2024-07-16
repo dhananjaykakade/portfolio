@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from './project/Card'
+import Card from './project/Card.tsx'
 import image1 from '../assets/e-commerce.png'
 import image2 from '../assets/interaction.png'
 import {  FaNode, FaCss3, FaHtml5 ,FaDocker  } from 'react-icons/fa';
