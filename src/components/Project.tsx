@@ -47,7 +47,7 @@ const projects = [
 const Project: React.FC = () => {
   return (
     <>
-     <h1 className='text-3xl mb-5'>Projects</h1>
+     <h1 className='text-3xl mb-5 mt-8'>Projects</h1>
      <div className='flex flex-col md:flex-row gap-20 md:gap-24 justify-center pt-10 items-center md:items-stretch w-full'>
 
      
