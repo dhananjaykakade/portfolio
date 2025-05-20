@@ -5,7 +5,19 @@ import type React from "react"
 import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { TypeAnimation } from "react-type-animation"
-import { ChevronDown, Download, Send, GitlabIcon as GitHub, Linkedin, Mail, Phone, Menu, X } from "lucide-react"
+import {
+  ChevronDown,
+  Download,
+  Send,
+  GitlabIcon as GitHub,
+  Linkedin,
+  Mail,
+  Phone,
+  Menu,
+  X,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -14,6 +26,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { AnimatedCounter } from "@/components/animated-counter"
 import { ParticleBackground } from "@/components/particle-background"
+import { sendContactEmail } from "./actions"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export default function Home() {
   // Refs for scroll functionality
@@ -32,6 +46,21 @@ export default function Home() {
 
   // Active section tracking
   const [activeSection, setActiveSection] = useState("hero")
+
+  // Contact form state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  })
+  const [formStatus, setFormStatus] = useState<{
+    type: "success" | "error" | null
+    message: string
+  }>({
+    type: null,
+    message: "",
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Handle scroll events for navbar transformation
   useEffect(() => {
@@ -68,6 +97,44 @@ export default function Home() {
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
     setMobileMenuOpen(false)
     ref.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setFormStatus({ type: null, message: "" })
+
+    try {
+      const result = await sendContactEmail(formData)
+
+      if (result.success) {
+        setFormStatus({
+          type: "success",
+          message: result.message,
+        })
+        // Reset form
+        setFormData({ name: "", email: "", message: "" })
+      } else {
+        setFormStatus({
+          type: "error",
+          message: result.message,
+        })
+      }
+    } catch (error) {
+      setFormStatus({
+        type: "error",
+        message: "An unexpected error occurred. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   // Animation variants
@@ -271,10 +338,17 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.div variants={buttonHover} initial="rest" whileHover="hover" whileTap="tap">
-              <Button className="bg-[#ff3c57] hover:bg-[#ff3c57]/90 relative overflow-hidden group">
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#ff3c57]/0 via-white/20 to-[#ff3c57]/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-                <Download className="mr-2 h-4 w-4" /> Download Resume
-              </Button>
+<a
+  href="/dhananjaykakade.pdf"
+  download
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button className="bg-[#ff3c57] hover:bg-[#ff3c57]/90 relative overflow-hidden group">
+    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#ff3c57]/0 via-white/20 to-[#ff3c57]/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+    <Download className="mr-2 h-4 w-4" /> Download Resume
+  </Button>
+</a>
             </motion.div>
 
             <motion.div variants={buttonHover} initial="rest" whileHover="hover" whileTap="tap">
@@ -367,7 +441,7 @@ export default function Home() {
                         asChild
                         className="text-[#ff3c57] hover:text-[#ff3c57]/80 hover:bg-zinc-800/50"
                       >
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://github.com/dhananjaykakade/evolve-ai-updated" target="_blank" rel="noopener noreferrer">
                           <GitHub className="h-5 w-5" />
                         </a>
                       </Button>
@@ -411,7 +485,7 @@ export default function Home() {
                         asChild
                         className="text-[#ff3c57] hover:text-[#ff3c57]/80 hover:bg-zinc-800/50"
                       >
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://github.com/dhananjaykakade/Rozgaar-Link" target="_blank" rel="noopener noreferrer">
                           <GitHub className="h-5 w-5" />
                         </a>
                       </Button>
@@ -530,13 +604,13 @@ export default function Home() {
                 <div className="flex items-center justify-center mb-8">
                   <div className="text-center px-4">
                     <div className="text-4xl font-bold text-[#ff3c57] mb-1">
-                      <AnimatedCounter from={0} to={48} duration={2} />
+                      <div className="text-4xl font-bold text-[#ff3c57] mb-1">48</div>
                     </div>
                     <div className="text-zinc-400 text-sm">Hours</div>
                   </div>
                   <div className="text-center px-4">
                     <div className="text-4xl font-bold text-[#ff3c57] mb-1">
-                      <AnimatedCounter from={0} to={4} duration={2} />
+                      <div className="text-4xl font-bold text-[#ff3c57] mb-1">4</div>
                     </div>
                     <div className="text-zinc-400 text-sm">Team Members</div>
                   </div>
@@ -583,15 +657,37 @@ export default function Home() {
                   <CardDescription className="text-zinc-400">I'll get back to you as soon as possible.</CardDescription>
                 </CardHeader>
                 <CardContent className="pt-6">
-                  <form className="space-y-4">
+                  {formStatus.type && (
+                    <Alert
+                      className={`mb-4 ${
+                        formStatus.type === "success"
+                          ? "bg-green-900/20 text-green-400 border-green-800"
+                          : "bg-red-900/20 text-red-400 border-red-800"
+                      }`}
+                    >
+                      {formStatus.type === "success" ? (
+                        <CheckCircle className="h-4 w-4" />
+                      ) : (
+                        <AlertCircle className="h-4 w-4" />
+                      )}
+                      <AlertTitle>{formStatus.type === "success" ? "Success!" : "Error!"}</AlertTitle>
+                      <AlertDescription>{formStatus.message}</AlertDescription>
+                    </Alert>
+                  )}
+
+                  <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-zinc-300">
                         Name
                       </Label>
                       <Input
                         id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
                         placeholder="Your name"
                         className="bg-zinc-800/50 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-[#ff3c57] focus:ring-[#ff3c57]/10"
+                        required
                       />
                     </div>
                     <div className="space-y-2">
@@ -600,9 +696,13 @@ export default function Home() {
                       </Label>
                       <Input
                         id="email"
+                        name="email"
                         type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
                         placeholder="Your email"
                         className="bg-zinc-800/50 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-[#ff3c57] focus:ring-[#ff3c57]/10"
+                        required
                       />
                     </div>
                     <div className="space-y-2">
@@ -611,15 +711,23 @@ export default function Home() {
                       </Label>
                       <Textarea
                         id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
                         placeholder="Your message"
                         rows={5}
                         className="bg-zinc-800/50 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-[#ff3c57] focus:ring-[#ff3c57]/10"
+                        required
                       />
                     </div>
                     <motion.div variants={buttonHover} initial="rest" whileHover="hover" whileTap="tap">
-                      <Button className="w-full bg-[#ff3c57] hover:bg-[#ff3c57]/90 relative overflow-hidden group">
+                      <Button
+                        type="submit"
+                        className="w-full bg-[#ff3c57] hover:bg-[#ff3c57]/90 relative overflow-hidden group"
+                        disabled={isSubmitting}
+                      >
                         <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#ff3c57]/0 via-white/20 to-[#ff3c57]/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-                        Send Message
+                        {isSubmitting ? "Sending..." : "Send Message"}
                       </Button>
                     </motion.div>
                   </form>
@@ -652,7 +760,7 @@ export default function Home() {
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
                     >
                       <Phone className="h-5 w-5 mr-3 text-[#ff3c57]" />
-                      <span className="text-zinc-300">+91 9552935559</span>
+                      <span className="text-zinc-300">+91 95529 35559</span>
                     </motion.div>
                   </CardContent>
                 </motion.div>
@@ -675,7 +783,7 @@ export default function Home() {
                           asChild
                           className="border-zinc-700 text-[#ff3c57] hover:text-white hover:bg-[#ff3c57] hover:border-[#ff3c57] transition-colors"
                         >
-                          <a href="https://github.com/dhananjaykakade/" target="_blank" rel="noopener noreferrer">
+                          <a href="https://github.com/dhananjaykakade" target="_blank" rel="noopener noreferrer">
                             <GitHub className="h-5 w-5" />
                           </a>
                         </Button>

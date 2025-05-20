@@ -12,38 +12,33 @@ interface AnimatedCounterProps {
 
 export function AnimatedCounter({ from, to, duration = 2, delay = 0 }: AnimatedCounterProps) {
   const [count, setCount] = useState(from)
-  const countRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(countRef, { once: true, margin: "-100px" })
+  const countRef = useRef<HTMLSpanElement>(null)
+  const isInView = useInView(countRef, { once: true })
   const [hasAnimated, setHasAnimated] = useState(false)
 
   useEffect(() => {
     if (isInView && !hasAnimated) {
       setHasAnimated(true)
 
-      let startTime: number
-      let animationFrameId: number
+      // Calculate the increment per frame
+      const totalFrames = duration * 60 // Assuming 60fps
+      const increment = (to - from) / totalFrames
+      let currentCount = from
 
-      const startAnimation = (timestamp: number) => {
-        if (!startTime) startTime = timestamp
-        const progress = Math.min((timestamp - startTime) / (duration * 1000), 1)
+      const timer = setInterval(() => {
+        currentCount += increment
 
-        setCount(Math.floor(from + progress * (to - from)))
-
-        if (progress < 1) {
-          animationFrameId = requestAnimationFrame(startAnimation)
+        if ((increment > 0 && currentCount >= to) || (increment < 0 && currentCount <= to)) {
+          clearInterval(timer)
+          setCount(to)
+        } else {
+          setCount(Math.floor(currentCount))
         }
-      }
+      }, 1000 / 60)
 
-      const timeoutId = setTimeout(() => {
-        animationFrameId = requestAnimationFrame(startAnimation)
-      }, delay * 1000)
-
-      return () => {
-        clearTimeout(timeoutId)
-        cancelAnimationFrame(animationFrameId)
-      }
+      return () => clearInterval(timer)
     }
-  }, [isInView, from, to, duration, delay, hasAnimated])
+  }, [isInView, from, to, duration, hasAnimated])
 
-  return <div ref={countRef}>{count}</div>
+  return <span ref={countRef}>{count}</span>
 }
