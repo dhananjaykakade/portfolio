@@ -339,7 +339,7 @@ export default function Home() {
           >
             <motion.div variants={buttonHover} initial="rest" whileHover="hover" whileTap="tap">
 <a
-  href="/dhananjaykakade.pdf"
+  href="/DhananjayKakade_fullstackWebDeveloper.pdf"
   download
   target="_blank"
   rel="noopener noreferrer"
