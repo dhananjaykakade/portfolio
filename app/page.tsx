@@ -164,7 +164,8 @@ export default function Portfolio() {
                   </div>
                   <div className="space-y-1">
                     <div className="text-sm text-zinc-400">Email</div>
-                    <div className="font-medium">kakadedhananjay59@gmail.com</div>
+                    <div className="font-medium break-all">kakadedhananjay59@gmail.com</div>
+
                   </div>
                   <div className="space-y-1">
                     <div className="text-sm text-zinc-400">Phone</div>
