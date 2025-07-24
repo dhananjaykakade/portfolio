@@ -1,103 +1,125 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Toaster } from "@/components/ui/toaster"; // Import Toaster for toasts
+import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Dhananjay Kakade | Backend-Focused Full-Stack Developer",
+  title:
+    "Dhananjay Kakade — Software Engineer (Node.js, React, Prisma, Docker)",
   description:
-    "Portfolio of Dhananjay Kakade, a backend-focused full-stack developer specializing in scalable, secure & smart web systems.",
-  applicationName: "Dhananjay Kakade Portfolio",
-  generator: "Next.js",
+    "Portfolio of Dhananjay Kakade, Software Development Engineer skilled in backend engineering, microservices, and AI-integrated apps.",
   keywords: [
     "Dhananjay Kakade",
-    "Portfolio",
-    "Backend Developer",
-    "Full-Stack Developer",
-    "Web Developer",
     "Software Engineer",
-    "JavaScript",
-    "TypeScript",
-    "Node.js",
-    "React",
-    "Next.js",
-    "Express.js",
-    "MongoDB",
-    "PostgreSQL",
-    "MySQL",
-    "GraphQL",
-    "REST API",
-    "Web Applications",
-    "Cloud Computing",
+    "Full Stack Developer",
+    "frontend developer",
+    "Backend Developer Pune",
+    "Node.js Engineer",
+    "Prisma",
     "Docker",
-    "AWS",
-    "Vercel",
-    "DevOps",
-    "Agile",
-    "Scrum",
-    "MCA",
-    "Computer Science",
+    "Software Portfolio",
+    "dhananjaykakade.tech",
+    "Software Engineer",
+    "Full Stack Developer",
+    "Microservices",
+    "Web Development",
+    "Software Engineer Pune",
+    "Software Development Engineer",
+    "Software Engineer India",
+    "Software Engineer Pune",
+    "Software Engineer India",
+    "Software Engineer Portfolio",
+    "Software Engineer Resume",
+    "Software Engineer CV",
+    "Software Engineer Projects",
+    "Software Engineer Skills",
+    "Software Engineer Experience",
+    "Software Engineer Education",
+    "Software Engineer Contact",
+    "Software Engineer About Me",
+    "Software Engineer Contact",
+    "dhananjaykakade",
+    "dhananjaykakade.tech",
+    "Dhananjay Kakade Portfolio",
+    "Dhananjay Kakade Resume",
+    "Dhananjay Kakade CV",
+    "Dhananjay Kakade Projects",
+    "Dhananjay Kakade Skills",
+    "Dhananjay Kakade Experience",
+    "Dhananjay Kakade Education",
+    "Dhananjay Kakade Contact",
+    "Dhananjay Kakade About Me",
+    "Dhananjay Kakade Contact",
+    "Dhananjay Kakade Software Engineer",
+    "Dhananjay Kakade Full Stack Developer",
+    "Dhananjay Kakade Backend Developer",
+    "Dhananjay Kakade Node.js Engineer",
+    "Web Developer Pune",
+    "Web Developer India",
+    "Web Developer Portfolio",
+    "Web Developer Resume",
+    "Web Developer CV",
+    "Web Developer Projects",
+    "Web Developer Skills",
+    "Web Developer Experience",
+    "Web Developer Education",
+    "MES IMCC Pune alumni",
+    "MES Institute of Management and Career Courses student",
+    "MES IMCC Pune student",
+    "Modern college Pune alumni",
+    "Modern college Pune student",
+    "Modern college of Arts Science and Commerce Pune alumni",
+    "Modern college of Arts Science and Commerce Pune student",
+    "",
   ],
-  themeColor: "#000000",
-  colorScheme: "dark",
-  icons: {
-    icon: "/d.png",
-    apple: "/d.png",
+  alternates: {
+    canonical: "https://dhananjaykakade.tech",
   },
-  authors: [
-    {
-      name: "Dhananjay Kakade",
-      url: "https://dhananjay-kakade.vercel.app/",
-    },
-  ],
-  creator: "Dhananjay Kakade",
-  publisher: "Dhananjay Kakade",
+  icons: {
+    icon: "/dk-fav.png", // Link to the new favicon
+  },
   openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: "https://dhananjay-kakade.vercel.app/",
-    siteName: "Dhananjay Kakade Portfolio",
-    title: "Dhananjay Kakade | Backend-Focused Full-Stack Developer",
+    title:
+      "Dhananjay Kakade — Software Engineer (Node.js, React, Prisma, Docker)",
     description:
-      "Explore the work and skills of Dhananjay Kakade, a backend-focused full-stack developer building scalable web applications.",
+      "Portfolio of Dhananjay Kakade, Software Development Engineer skilled in backend engineering, microservices, and AI-integrated apps.",
+    url: "https://dhananjaykakade.tech",
+    siteName: "Dhananjay Kakade",
     images: [
       {
-        url: "/og.png",
+        url: "/og-image.png", // Link to the new OG image
         width: 1200,
         height: 630,
         alt: "Dhananjay Kakade Portfolio",
       },
     ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@dhananjay_kakade", // Optional: replace with actual Twitter handle
-    creator: "@dhananjay_kakade",
-    title: "Dhananjay Kakade | Backend-Focused Full-Stack Developer",
+    title:
+      "Dhananjay Kakade — Software Engineer (Node.js, React, Prisma, Docker)",
     description:
-      "Explore Dhananjay Kakade's portfolio – scalable web systems, backend expertise, and cloud-native full-stack development.",
-    images: ["/og.png"],
+      "Portfolio of Dhananjay Kakade, Software Development Engineer skilled in backend engineering, microservices, and AI-integrated apps.",
+    images: ["/og-image.png"], // Link
+    creator: "@dhananjaykakade",
   },
   robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    "max-snippet": -1,
-    "max-image-preview": "large",
-    "max-video-preview": -1,
-  },
-  
-  alternates: {
-    canonical: "https://dhananjay-kakade.vercel.app/",
-    languages: {
-      "en-IN": "https://dhananjay-kakade.vercel.app/",
-      "en-US": "https://dhananjay-kakade.vercel.app/",
+  index: true,
+  follow: true,
+  nocache: false,
+},
+authors: [
+    {
+      name: "Dhananjay Kakade",
+      url: "https://dhananjaykakade.tech",
     },
-  },
-
+  ],
+  creator: "Dhananjay Kakade",
+  applicationName: "Dhananjay Kakade Portfolio",
 };
 
 export default function RootLayout({
@@ -106,15 +128,41 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Dhananjay Kakade",
+      url: "https://dhananjaykakade.tech",
+      image: "https://dhananjaykakade.tech/dk.png",
+      sameAs: [
+        "https://github.com/dhananjaykakade",
+        "https://www.linkedin.com/in/dhananjay-kakade-657087294/",
+       
+      ],
+      jobTitle: "Software Development Engineer",
+      worksFor: {
+        "@type": "Organization",
+        name: "Your Company or Freelancer",
+      },
+    }),
+  }}
+/>
+
+      </head>
+      <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="dark" // Default to dark theme as requested
           enableSystem
           disableTransitionOnChange
         >
           {children}
+          <Toaster /> {/* Add Toaster component */}
         </ThemeProvider>
       </body>
     </html>
