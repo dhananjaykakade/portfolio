@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     siteName: "Dhananjay Kakade",
     images: [
       {
-        url: "/og-image.png", // Link to the new OG image
+        url: "/dk.png", // Link to the new OG image
         width: 1200,
         height: 630,
         alt: "Dhananjay Kakade Portfolio",
