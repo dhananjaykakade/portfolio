@@ -247,7 +247,7 @@ export default function Portfolio() {
               description="AI Grading system with Gemini API. Handles 100+ concurrent submissions with 60% faster evaluation."
               tags={["Node.js", "Prisma", "Gemini AI", "Docker"]}
               image="/evolve.png"
-              demoUrl="#" // No live demo provided
+              // demoUrl="#" // No live demo provided
               repoUrl="https://github.com/dhananjaykakade/evolve-ai-updated"
             />
             <ProjectCard
@@ -255,7 +255,7 @@ export default function Portfolio() {
               description="Event registration platform for 600+ users. Optimized backend, used Nginx reverse proxy for load balancing."
               tags={["Node.js", "Docker", "Nginx", "MongoDB"]}
               image="/interaction.png"
-              demoUrl="#" // No live demo provided
+              // demoUrl="#" // No live demo provided
               repoUrl="https://github.com/interactors2025/production-interaction25/"
             />
             <ProjectCard
@@ -264,7 +264,14 @@ export default function Portfolio() {
               tags={["Next.js 14", "Supabase", "Razorpay"]}
               image="/course.png"
               demoUrl="https://courses.trinityconsultancy.tech/"
-              repoUrl="#" // No repo provided
+              // repoUrl="#" // No repo provided
+            />
+            <ProjectCard
+              title="MotionPix India"
+              description="Professional animation website and portfolio showcase. With 1000+ monthly visitors. And deployed on Vercel."
+              tags={["Next.js 14", "Tailwind CSS", "TypeScript"]}
+              image="/motionpx.png"
+              demoUrl="https://motionpixindia.com/"
             />
           </div>
         </div>

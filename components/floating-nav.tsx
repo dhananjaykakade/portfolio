@@ -49,7 +49,7 @@ const FloatingNav = () => {
   return (
     <>
       <motion.div
-        className={`fixed top-6 left-[44%]  -translate-x-1/2 z-50 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`fixed top-6 left-[35%]  -translate-x-1/2 z-50 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         initial={{ y: -100 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3 }}

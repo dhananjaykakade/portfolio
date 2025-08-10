@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     "Portfolio of Dhananjay Kakade, Software Development Engineer skilled in backend engineering, microservices, and AI-integrated apps.",
   keywords: [
     "Dhananjay Kakade",
+    "dhananjaykakade",
+    "dhananajaykakde",
     "Software Engineer",
     "Full Stack Developer",
     "frontend developer",
@@ -78,7 +80,7 @@ export const metadata: Metadata = {
     canonical: "https://dhananjaykakade.tech",
   },
   icons: {
-    icon: "/dk-fav.png", // Link to the new favicon
+    icon: "/favicon.ico", // Link to the new favicon
   },
   openGraph: {
     title:
