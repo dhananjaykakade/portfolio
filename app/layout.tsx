@@ -133,6 +133,23 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="CS0_YCpM6cAq7DQRdKZBIBHo0IpZAe1zOZFEgwOAqBw" />
+        {/* add google analytics */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-QWWPY6H4GS"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-QWWPY6H4GS');
+            `,
+          }}
+        />
         <Script
   type="application/ld+json"
   dangerouslySetInnerHTML={{
