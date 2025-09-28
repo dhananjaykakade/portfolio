@@ -126,7 +126,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <span className="text-[#4B5563]">Backend</span>{' '}
+              <span className="text-[#4B5563]">Full Stack</span>{' '}
               <motion.span
                 className="text-[#FF7F3E]"
                 animate={{ 
