@@ -1,9 +1,11 @@
 import type React from "react";
 import type { Metadata } from "next";
-import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster"; // Import Toaster for toasts
 import Script from "next/script";
+import { Footer } from "@/components/Footer"
+import "./globals.css";
+import FloatingNav from "@/components/floating-nav"; // Corrected import to default
 
 export const metadata: Metadata = {
   title:
@@ -181,7 +183,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <FloatingNav />
           {children}
+          <Footer />
           <Toaster /> {/* Add Toaster component */}
         </ThemeProvider>
       </body>

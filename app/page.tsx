@@ -1,428 +1,263 @@
-import Link from "next/link"
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react"
+"use client"
+import Link from "next/link";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ProjectCard } from "@/components/project-card";
+import { SkillBadge } from "@/components/skill-badge";
+import { Timeline } from "@/components/timeline";
+import { ContactForm } from "@/components/contact-form";
+import { CreativeHero } from "@/components/creative-hero";
+import FloatingNav from "@/components/floating-nav"; // Corrected import to default
+import { MouseFollower } from "@/components/mouse-follower";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { SectionHeading } from "@/components/section-heading";
+import { GlassmorphicCard } from "@/components/glassmorphic-card";
+import { Achievements } from "@/components/achievements";
+import { BlogCard } from "@/components/blog-card";
+import { blogPosts } from "@/lib/blog-data";
+import HeroSection from "@/components/herosection";
+import AboutSection from "@/components/aboutSection";
+import SkillsSection from "@/components/skillBadge";
+import ProjectsSection from "@/components/ProjectSection";
+import AchievementsSection from "@/components/AchievementsSection";
+import WorkexperienceSection from "@/components/WorkexperienceSection";
+import { motion } from "framer-motion"
+import { Phone, Download, Calendar } from "lucide-react"
+import { Footer } from "@/components/Footer"
+import BlogSection from "@/components/blogSection";
 
-import { Button } from "@/components/ui/button"
-import { ProjectCard } from "@/components/project-card"
-import { SkillBadge } from "@/components/skill-badge"
-import { Timeline } from "@/components/timeline"
-import { ContactForm } from "@/components/contact-form"
-import { CreativeHero } from "@/components/creative-hero"
-import FloatingNav from "@/components/floating-nav" // Corrected import to default
-import { MouseFollower } from "@/components/mouse-follower"
-import { ScrollProgress } from "@/components/scroll-progress"
-import { SectionHeading } from "@/components/section-heading"
-import { GlassmorphicCard } from "@/components/glassmorphic-card"
-import { Achievements } from "@/components/achievements"
 
 export default function Portfolio() {
+
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    
+    <div className="min-h-screen overflow-hidden">
       <MouseFollower />
       <ScrollProgress />
-      <FloatingNav />
+
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
-        </div>
 
-        <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <div className="inline-block">
-              <div className="relative px-3 py-1 text-sm font-medium rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4 mt-4">
-                <span className="relative z-10">Software Development Engineer</span>
-                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/20 to-white/20 animate-pulse"></span>
-              </div>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              <span className="block">Hi, I'm</span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-white">
-                Dhananjay Kakade
-              </span>
-            </h1>
-            <p className="text-xl text-zinc-200 max-w-[600px]">Specializing in Scalable Systems & Cloud-native Apps.</p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button className="relative overflow-hidden group bg-red-500 border-0">
-                <span className="relative z-10 flex items-center">
-                  <Link href="/#projects" className="flex items-center">
-                  Explore Projects{" "}
-                  </Link>
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity"></span>
-              </Button>
-              <Button
-                variant="outline"
-                className="border-zinc-700 text-red-500 hover:text-white hover:border-zinc-500 bg-transparent"
-              >
-                <a href="/dhananjay_kakade_sde.pdf" target="_blank" rel="noopener noreferrer">
-                  Download Resume
-                </a>
-              </Button>
-            </div>
-            <div className="flex gap-4 pt-4">
-              <Link href="https://github.com/dhananjaykakade" target="_blank" rel="noopener noreferrer">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white"
-                >
-                  <Github className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
-                </Button>
-              </Link>
-              <Link
-                href="https://www.linkedin.com/in/dhananjay-kakade-657087294/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white"
-                >
-                  <Linkedin className="h-5 w-5" />
-                  <span className="sr-only">LinkedIn</span>
-                </Button>
-              </Link>
-              <Link href="mailto:kakadedhananjay59@gmail.com">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white"
-                >
-                  <Mail className="h-5 w-5" />
-                  <span className="sr-only">Email</span>
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <CreativeHero />
-          </div>
-        </div>
+      <HeroSection /> 
+      {/* About Section */}      
+      <AboutSection />
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center items-start p-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse"></div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-32 relative">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-          <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-        </div>
-
-        <div className="container relative z-10">
-          <SectionHeading title="About Me" subtitle="My background and journey" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-16">
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-red-500/20 to-white/20 blur-xl opacity-70"></div>
-              <div className="relative aspect-square rounded-xl overflow-hidden border border-zinc-800">
-                <img
-                  src="/dk.png"
-                  alt="Dhananjay Kakade"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 w-full p-6">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                    <span className="text-sm font-medium">Available for work</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <GlassmorphicCard>
-                <p className="text-lg text-zinc-200">
-                  I'm a passionate backend-focused developer from Pune, India. Currently pursuing MCA at IMCC. I'm
-                  skilled in building efficient, scalable APIs, real-time systems, and optimizing performance across web
-                  platforms.
-                </p>
-                <p className="text-lg text-zinc-200 mt-4">
-                  I have a proven ability to reduce API response times and frontend load delays. My journey includes
-                  being a hackathon winner, an open-source contributor, and a team leader.
-                </p>
-                <p className="text-lg text-zinc-200 mt-4">
-                  When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-                  and staying up-to-date with the latest industry trends.
-                </p>
-
-                <div className="grid grid-cols-2 gap-4 mt-8">
-                  <div className="space-y-1">
-                    <div className="text-sm text-zinc-400">Name</div>
-                    <div className="font-medium">Dhananjay Kakade</div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="text-sm text-zinc-400">Email</div>
-                    <div className="font-medium break-all">kakadedhananjay59@gmail.com</div>
-
-                  </div>
-                  <div className="space-y-1">
-                    <div className="text-sm text-zinc-400">Phone</div>
-                    <div className="font-medium">+91 95529 35559</div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="text-sm text-zinc-400">Location</div>
-                    <div className="font-medium">Pune, India</div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="text-sm text-zinc-400">Availability</div>
-                    <div className="font-medium text-green-500">Open to opportunities</div>
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <Button className="bg-zinc-800 hover:bg-zinc-700 text-white">
-                    <a href="/Dhananjay_Kakade_sde.pdf" download>
-                      Download Resume
-                    </a>
-                  </Button>
-                </div>
-              </GlassmorphicCard>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-32 relative">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-        </div>
-
-        <div className="container relative z-10">
-          <SectionHeading title="My Skills" subtitle="Technologies I work with" />
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16">
-            {/* Advanced */}
-            <SkillBadge name="JavaScript" level={95} />
-            <SkillBadge name="React" level={90} />
-            <SkillBadge name="Node.js" level={95} />
-            <SkillBadge name="MongoDB" level={90} />
-            <SkillBadge name="PostgreSQL" level={85} />
-            <SkillBadge name="Prisma ORM" level={85} />
-            <SkillBadge name="Docker" level={80} />
-
-            {/* Intermediate */}
-            <SkillBadge name="Python" level={75} />
-            <SkillBadge name="Redux" level={70} />
-            <SkillBadge name="Redis" level={65} />
-            <SkillBadge name="Go (Gin)" level={60} />
-            <SkillBadge name="Tailwind CSS" level={80} />
-
-            {/* Fundamentals */}
-            <SkillBadge name="OOP" level={90} />
-            <SkillBadge name="DSA" level={85} />
-            <SkillBadge name="Linux" level={70} />
-            <SkillBadge name="RDBMS" level={80} />
-            <SkillBadge name="Networking" level={70} />
-          </div>
-        </div>
-      </section>
+      <SkillsSection />
 
       {/* Projects Section */}
-      <section id="projects" className="py-32 relative">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-        </div>
-
-        <div className="container relative z-10">
-          <SectionHeading title="Featured Projects" subtitle="Some of my recent work" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-            <ProjectCard
-              title="Evolve AI"
-              description="AI Grading system with Gemini API. Handles 100+ concurrent submissions with 60% faster evaluation."
-              tags={["Node.js", "Prisma", "Gemini AI", "Docker"]}
-              image="/evolve.png"
-              // demoUrl="#" // No live demo provided
-              repoUrl="https://github.com/dhananjaykakade/evolve-ai-updated"
-            />
-            <ProjectCard
-              title="Interaction 24"
-              description="Event registration platform for 600+ users. Optimized backend, used Nginx reverse proxy for load balancing."
-              tags={["Node.js", "Docker", "Nginx", "MongoDB"]}
-              image="/interaction.png"
-              // demoUrl="#" // No live demo provided
-              repoUrl="https://github.com/interactors2025/production-interaction25/"
-            />
-            <ProjectCard
-              title="Trinity Courses"
-              description="Online course-selling platform with secure payment and authentication. Live users: 20+"
-              tags={["Next.js 14", "Supabase", "Razorpay"]}
-              image="/course.png"
-              demoUrl="https://courses.trinityconsultancy.tech/"
-              // repoUrl="#" // No repo provided
-            />
-            <ProjectCard
-              title="MotionPix India"
-              description="Professional animation website and portfolio showcase. With 1000+ monthly visitors. And deployed on Vercel."
-              tags={["Next.js 14", "Tailwind CSS", "TypeScript"]}
-              image="/motionpx.png"
-              demoUrl="https://motionpixindia.com/"
-            />
-          </div>
-        </div>
-      </section>
+      <ProjectsSection />
 
       {/* Achievements Section */}
-      <section id="achievements" className="py-32 relative">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-          <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-        </div>
-        <div className="container relative z-10">
-          <SectionHeading title="Achievements" subtitle="My notable accomplishments" />
-          <div className="mt-16">
-            <Achievements />
-          </div>
-        </div>
-      </section>
+      <AchievementsSection />
 
       {/* Experience Section */}
-      <section id="experience" className="py-32 relative">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-          <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-        </div>
+      <WorkexperienceSection />
 
-        <div className="container relative z-10">
-          <SectionHeading title="Work Experience" subtitle="My professional journey" />
 
-          <div className="mt-16">
-            <Timeline />
-          </div>
-        </div>
-      </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-32 relative">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-64 h-64 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-        </div>
 
-        <div className="container relative z-10">
-          <SectionHeading title="Get In Touch" subtitle="Let's build something together!" />
+      {/* Blog Section */}
+      <BlogSection/>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-16">
-            <GlassmorphicCard>
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center">
-                    <Mail className="h-5 w-5 text-red-500" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-zinc-400">Email</div>
-                    <div className="font-medium text-zinc-200">kakadedhananjay59@gmail.com</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center">
-                    <Linkedin className="h-5 w-5 text-red-500" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-zinc-400">LinkedIn</div>
-                    <div className="font-medium text-zinc-200">linkedin.com/in/dhananjay-kakade-657087294/</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center">
-                    <Github className="h-5 w-5 text-red-500" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-zinc-400">GitHub</div>
-                    <div className="font-medium text-zinc-200">github.com/dhananjaykakade</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center">
-                    <span className="text-xl text-red-500">+91</span>
-                  </div>
-                  <div>
-                    <div className="text-sm text-zinc-400">Phone</div>
-                    <div className="font-medium text-zinc-200">+91 95529 35559</div>
-                  </div>
-                </div>
-              </div>
 
-              <div className="mt-8 pt-8 border-t border-zinc-800">
-                <h4 className="text-lg font-medium mb-4">Current Status</h4>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="text-zinc-200">Available for freelance work and full-time opportunities</span>
-                </div>
-              </div>
-            </GlassmorphicCard>
+{/* Contact Section */}
+<section id="contact" className="py-32 relative overflow-hidden bg-[#FFF5F0]">
 
-            <ContactForm />
-          </div>
-        </div>
-      </section>
+  {/* Floating Particles */}
+  <div className="absolute inset-0 z-0">
+    {[...Array(8)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute w-1.5 h-1.5 bg-[#FF7F3E]/40 rounded-full"
+        style={{
+          left: `${20 + Math.random() * 60}%`,
+          top: `${20 + Math.random() * 60}%`,
+        }}
+        animate={{
+          y: [0, -40, 0],
+          opacity: [0.2, 0.8, 0.2],
+        }}
+        transition={{
+          duration: 4 + Math.random() * 3,
+          repeat: Infinity,
+          delay: Math.random() * 2,
+        }}
+      />
+    ))}
+  </div>
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-800 py-12">
-        <div className="container flex flex-col md:flex-row justify-between items-center gap-6">
-          <div>
-            <Link href="/" className="font-bold text-xl">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-white">Dhananjay</span>
-              <span className="text-white">Kakade</span>
-            </Link>
-            <p className="text-sm text-zinc-400 mt-2">
-              © {new Date().getFullYear()} Dhananjay Kakade. All rights reserved.
+  <div className="container relative z-10">
+    {/* Animated Section Heading */}
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-black text-[#1F2937] mb-4">
+                Contact Me
+            </h2>
+            <p className="text-lg text-[#1F2937] max-w-2xl mx-auto">
+              Let's build something amazing together!
             </p>
-          </div>
-          <div className="flex gap-4">
-            <Link href="https://github.com/dhananjaykakade" target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white"
+          </motion.div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-16">
+      {/* Contact Information Card */}
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+<div className="relative rounded-2xl bg-white border border-[#FF7F3E]/20 p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          {/* Gradient Overlay */}
+  <div className="absolute -inset-1 bg-gradient-to-r from-[#FF7F3E]/5 to-[#3AB0FF]/5 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-1000" />
+          
+          <div className="relative">
+            <h3 className="text-2xl font-bold text-[#1F2937] mb-2">Contact Information</h3>
+            <p className="text-[#4B5563] mb-8">Let's connect and discuss your next project</p>
+
+            <div className="space-y-6">
+              {/* Email */}
+              <motion.a
+                href="mailto:kakadedhananjay59@gmail.com"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white/50 border border-[#FF7F3E]/10 hover:border-[#FF7F3E]/30 transition-all duration-300 group/item"
+                whileHover={{ x: 5 }}
               >
-                <Github className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </Button>
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/dhananjay-kakade-657087294/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white"
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FF7F3E] to-[#FF9F5A] flex items-center justify-center shadow-md">
+                  <Mail className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-sm text-[#4B5563]">Email</div>
+                  <div className="font-medium text-[#1F2937] group-hover/item:text-[#FF7F3E] transition-colors">
+                    kakadedhananjay59@gmail.com
+                  </div>
+                </div>
+              </motion.a>
+
+              {/* LinkedIn */}
+              <motion.a
+                href="https://linkedin.com/in/dhananjay-kakade-657087294/"
+                target="_blank"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white/50 border border-[#FF7F3E]/10 hover:border-[#FF7F3E]/30 transition-all duration-300 group/item"
+                whileHover={{ x: 5 }}
               >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </Button>
-            </Link>
-            <Link href="mailto:kakadedhananjay59@gmail.com">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white"
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3AB0FF] to-[#0077B5] flex items-center justify-center shadow-md">
+                  <Linkedin className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-sm text-[#4B5563]">LinkedIn</div>
+                  <div className="font-medium text-[#1F2937] group-hover/item:text-[#3AB0FF] transition-colors">
+                    /in/dhananjay-kakade
+                  </div>
+                </div>
+              </motion.a>
+
+              {/* GitHub */}
+              <motion.a
+                href="https://github.com/dhananjaykakade"
+                target="_blank"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white/50 border border-[#FF7F3E]/10 hover:border-[#FF7F3E]/30 transition-all duration-300 group/item"
+                whileHover={{ x: 5 }}
               >
-                <Mail className="h-5 w-5" />
-                <span className="sr-only">Email</span>
-              </Button>
-            </Link>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1F2937] to-[#4B5563] flex items-center justify-center shadow-md">
+                  <Github className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-sm text-[#4B5563]">GitHub</div>
+                  <div className="font-medium text-[#1F2937] group-hover/item:text-[#1F2937] transition-colors">
+                    @dhananjaykakade
+                  </div>
+                </div>
+              </motion.a>
+
+              {/* Phone */}
+              <motion.a
+                href="tel:+919552935559"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white/50 border border-[#FF7F3E]/10 hover:border-[#FF7F3E]/30 transition-all duration-300 group/item"
+                whileHover={{ x: 5 }}
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center shadow-md">
+                  <Phone className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-sm text-[#4B5563]">Phone</div>
+                  <div className="font-medium text-[#1F2937] group-hover/item:text-[#10B981] transition-colors">
+                    +91 95529 35559
+                  </div>
+                </div>
+              </motion.a>
+            </div>
+
+            {/* Current Status */}
+            <div className="mt-8 pt-8 border-t border-[#FF7F3E]/20">
+              <h4 className="text-lg font-semibold text-[#1F2937] mb-4">Current Status</h4>
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-[#10B981]/10 to-[#3AB0FF]/10 border border-[#10B981]/20">
+                <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                <span className="text-[#1F2937] font-medium">
+                  Available for freelance work and full-time opportunities
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-      </footer>
+      </motion.div>
+
+      {/* Contact Form */}
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        viewport={{ once: true }}
+      >
+        <ContactForm />
+      </motion.div>
     </div>
-  )
+
+    {/* Quick Action Buttons */}
+    <motion.div
+      className="flex flex-wrap justify-center gap-4 mt-12"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.6 }}
+      viewport={{ once: true }}
+    >
+      <motion.a
+        href="/resume.pdf"
+        download
+        className="inline-flex items-center gap-2 px-6 py-3 bg-[#1F2937] text-white font-medium rounded-xl hover:bg-[#374151] transition-colors"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Download className="h-4 w-4" />
+        Download Resume
+      </motion.a>
+      <motion.a
+        href="https://calendly.com/kakadedhananjay59/30min"
+        target="_blank"
+        className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF7F3E] text-white font-medium rounded-xl hover:bg-[#FF9F5A] transition-colors"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Calendar className="h-4 w-4" />
+        Schedule Meeting
+      </motion.a>
+    </motion.div>
+  </div>
+
+  {/* Section Bottom Border */}
+  <motion.div
+    className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FF7F3E]/30 to-transparent"
+    initial={{ scaleX: 0 }}
+    whileInView={{ scaleX: 1 }}
+    transition={{ duration: 1, delay: 0.8 }}
+    viewport={{ once: true }}
+  />
+</section>
+
+
+    </div>
+  );
 }

@@ -63,7 +63,10 @@ export function CreativeHero() {
 
         // Use red and white for particles
         const isRed = Math.random() < 0.5
-        this.color = isRed ? "hsl(0, 84%, 60%)" : "hsl(0, 0%, 98%)" // Red or White
+        this.color = isRed 
+  ? "hsl(14, 100%, 57%)"   // FF7F3E orange/red
+  : "hsl(260, 60%, 20%)";  // deep purple/black
+
       }
 
       update() {

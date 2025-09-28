@@ -86,11 +86,12 @@ export function ContactForm() {
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      <div className="relative overflow-hidden rounded-xl bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 p-6 transition-all duration-300 hover:border-red-500/50">
-        <div className="absolute -inset-1 bg-gradient-to-r from-red-500/10 to-white/10 rounded-xl blur opacity-25 hover:opacity-100 transition duration-1000 hover:duration-200"></div>
+      <div className="relative overflow-hidden rounded-2xl bg-[#FFF5F0] border border-[#FF7F3E]/20 p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
+        <div className="absolute -inset-1 bg-gradient-to-r from-[#FF7F3E]/5 to-[#3AB0FF]/5 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-1000"></div>
 
         <div className="relative">
-          <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
+          <h3 className="text-2xl font-bold text-[#1F2937] mb-2">Send Me a Message</h3>
+          <p className="text-[#4B5563] mb-6">Let's discuss your project ideas</p>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -99,15 +100,15 @@ export function ContactForm() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="sr-only">Your Name</FormLabel>
+                    <FormLabel className="text-[#1F2937] font-medium">Your Name</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Your Name"
-                        className="bg-zinc-900/50 border-zinc-700 focus:border-red-500 focus:ring-red-500/20 text-zinc-200"
+                        placeholder="Enter your name"
+                        className="bg-white/80 border-[#FF7F3E]/20 focus:border-[#FF7F3E] focus:ring-[#FF7F3E]/20 text-[#1F2937] placeholder-[#4B5563] transition-colors"
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-[#FF7F3E]" />
                   </FormItem>
                 )}
               />
@@ -116,16 +117,16 @@ export function ContactForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="sr-only">Your Email</FormLabel>
+                    <FormLabel className="text-[#1F2937] font-medium">Your Email</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="Your Email"
-                        className="bg-zinc-900/50 border-zinc-700 focus:border-red-500 focus:ring-red-500/20 text-zinc-200"
+                        placeholder="Enter your email"
+                        className="bg-white/80 border-[#FF7F3E]/20 focus:border-[#FF7F3E] focus:ring-[#FF7F3E]/20 text-[#1F2937] placeholder-[#4B5563] transition-colors"
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-[#FF7F3E]" />
                   </FormItem>
                 )}
               />
@@ -134,15 +135,15 @@ export function ContactForm() {
                 name="subject"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="sr-only">Subject</FormLabel>
+                    <FormLabel className="text-[#1F2937] font-medium">Subject</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Subject"
-                        className="bg-zinc-900/50 border-zinc-700 focus:border-red-500 focus:ring-red-500/20 text-zinc-200"
+                        placeholder="What's this about?"
+                        className="bg-white/80 border-[#FF7F3E]/20 focus:border-[#FF7F3E] focus:ring-[#FF7F3E]/20 text-[#1F2937] placeholder-[#4B5563] transition-colors"
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-[#FF7F3E]" />
                   </FormItem>
                 )}
               />
@@ -151,30 +152,51 @@ export function ContactForm() {
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="sr-only">Your Message</FormLabel>
+                    <FormLabel className="text-[#1F2937] font-medium">Your Message</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Your Message"
+                        placeholder="Tell me about your project..."
                         rows={5}
-                        className="bg-zinc-900/50 border-zinc-700 focus:border-red-500 focus:ring-red-500/20 text-zinc-200"
+                        className="bg-white/80 border-[#FF7F3E]/20 focus:border-[#FF7F3E] focus:ring-[#FF7F3E]/20 text-[#1F2937] placeholder-[#4B5563] resize-none transition-colors"
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-[#FF7F3E]" />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 border-0" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>Sending...</>
-                ) : (
-                  <>
-                    Send Message <Send className="ml-2 h-4 w-4" />
-                  </>
-                )}
-              </Button>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-[#FF7F3E] to-[#FF9F5A] hover:from-[#FF9F5A] hover:to-[#FF7F3E] text-white font-semibold border-0 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" 
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Sending...
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      Send Message <Send className="h-4 w-4" />
+                    </div>
+                  )}
+                </Button>
+              </motion.div>
             </form>
           </Form>
+
+          {/* Success State (optional) */}
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ 
+              opacity: form.formState.isSubmitSuccessful ? 1 : 0,
+              height: form.formState.isSubmitSuccessful ? "auto" : 0
+            }}
+            className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-sm"
+          >
+            <p>Thank you for your message! I'll get back to you soon.</p>
+          </motion.div>
         </div>
       </div>
     </motion.div>
