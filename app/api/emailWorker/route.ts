@@ -39,8 +39,7 @@ export async function POST(request: Request) {
     // Send the email
     await transporter.sendMail(mailOptions)
     // Send acknowledgment email to the user
-setTimeout(() => {
-    transporter.sendMail({
+await transporter.sendMail({
   from: process.env.EMAIL_USER,
   to: email,
   subject: "Thank you for contacting me! 🚀",
@@ -359,7 +358,6 @@ setTimeout(() => {
   `,
 })
 
-}, 2000);
 
 
     return NextResponse.json({ message: "Message sent successfully!" }, { status: 200 })
