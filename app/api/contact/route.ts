@@ -17,7 +17,7 @@ const url =
     ? "http://localhost:3001/api/emailWorker"
     : `${process.env.APP_URL}/api/emailWorker`;
 
- qstash.publishJSON({
+await qstash.publishJSON({
   url,
   body: { name, email, subject, message },
 });
