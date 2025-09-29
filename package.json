@@ -43,6 +43,7 @@
     "@tabler/icons-react": "^3.35.0",
     "@types/nodemailer": "^6.4.17",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@upstash/qstash": "^2.8.3",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -70,6 +71,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
+    "vercel": "^48.1.6",
     "zod": "^3.24.1"
   },
   "devDependencies": {

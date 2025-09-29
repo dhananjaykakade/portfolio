@@ -28,22 +28,28 @@ function renderBlogContent(content: string,loading:boolean=false): JSX.Element[]
   let inCodeBlock = false
   let currentLanguage = ''
 
-  const parseLine = (line: string, index: number) => {
-  const parts = line.split(/(\*\*.*?\*\*)/g); // split by **...**
-  
+const parseLine = (line: string, index: number) => {
+  // Match both **bold** and normal text
+  const parts = line.match(/(\*\*.*?\*\*|[^*]+)/g) || [];
+
   return parts.map((part, i) => {
-    if (part.startsWith('**') && part.endsWith('**')) {
+    if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong 
           key={`strong-${index}-${i}`} 
           className="font-bold text-[#1F2937]">
-          {part.slice(2, -2)} {/* remove ** */}
+          {part.slice(2, -2).trim()}
         </strong>
       );
     }
-    return <span key={`text-${index}-${i}`}>{part}</span>;
+    return (
+      <span key={`text-${index}-${i}`} className="text-[#4B5563]">
+        {part}
+      </span>
+    );
   });
 };
+
 
   lines.forEach((line, index) => {
     if (line.startsWith('```')) {

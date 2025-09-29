@@ -32,6 +32,7 @@ const FloatingNav = () => {
     { name: "Achievements", href: "#achievements" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
+    { name: "Blog", href: "/blog" },
   ]
 
   const handleNavClick = () => {
