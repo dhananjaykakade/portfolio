@@ -12,10 +12,7 @@ export async function POST(request: Request) {
     }
 
 
-const url =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3001/api/emailWorker"
-    : `${process.env.APP_URL}/api/emailWorker`;
+const url = `${process.env.APP_URL}/api/emailWorker`;
 
 await qstash.publishJSON({
   url,

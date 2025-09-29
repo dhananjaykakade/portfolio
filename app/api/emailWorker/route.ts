@@ -81,25 +81,7 @@ await transporter.sendMail({
                 </div>
             </div>
             
-            <!-- Contact Info -->
-            <div style="background: #F9F9F9; border-radius: 16px; padding: 24px; margin: 30px 0;">
-                <h3 style="color: #1F2937; font-size: 18px; font-weight: 700; margin-bottom: 16px; text-align: center;">Quick Contact Info</h3>
-                <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <div style="display: flex; align-items: center; gap: 12px; color: #4B5563; font-size: 14px;">
-                        <span style="color: #FF7F3E; font-weight: bold;">📧</span>
-                        <span>kakadedhananjay59@gmail.com</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 12px; color: #4B5563; font-size: 14px;">
-                        <span style="color: #FF7F3E; font-weight: bold;">📱</span>
-                        <span>+91 95529 35559</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 12px; color: #4B5563; font-size: 14px;">
-                        <span style="color: #FF7F3E; font-weight: bold;">🌐</span>
-                        <span>https://dhananjaykakade.tech</span>
-                    </div>
-                </div>
-            </div>
-            
+
             <!-- CTA -->
             <div style="text-align: center; margin: 30px 0;">
                 <a href="https://dhananjaykakade.tech" style="display: inline-block; background: linear-gradient(135deg, #FF7F3E 0%, #FFB67B 100%); color: #FFFFFF; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 15px; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(255, 127, 62, 0.3);">
@@ -115,7 +97,7 @@ await transporter.sendMail({
                 Let's create something amazing together.
             </p>
             
-            <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: center; gap: 10%; margin-bottom: 2%;">
                 <a href="https://www.linkedin.com/in/dhananjay-kakade-657087294/" style="color: #FF7F3E; text-decoration: none; font-weight: 600; font-size: 14px; transition: color 0.3s ease;">LinkedIn</a>
                 <a href="https://github.com/dhananjaykakade" style="color: #FF7F3E; text-decoration: none; font-weight: 600; font-size: 14px; transition: color 0.3s ease;">GitHub</a>
                 <a href="https://x.com/Dhananjay0980" style="color: #FF7F3E; text-decoration: none; font-weight: 600; font-size: 14px; transition: color 0.3s ease;">Twitter</a>
