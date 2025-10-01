@@ -210,7 +210,7 @@ export default function RootLayout({
 />
 
       </head>
-      <body>
+      <body className="gpu-accelerated">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark" // Default to dark theme as requested
@@ -218,7 +218,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <FloatingNav />
-          {children}
+          <main className="will-change-transform">
+            {children}
+          </main>
           <Footer />
           <Toaster /> {/* Add Toaster component */}
         </ThemeProvider>

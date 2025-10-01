@@ -28,7 +28,7 @@ import BlogSection from "@/components/blogSection";
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-hidden gpu-accelerated">
       <MouseFollower />
       <ScrollProgress />
 

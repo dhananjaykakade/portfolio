@@ -62,11 +62,28 @@
 @layer base {
   * {
     @apply border-border;
+  }
+  html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground;
-    scroll-behavior: smooth;
+    overflow-x: hidden;
+    /* Hardware acceleration */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Layout containment for performance */
+  section {
+    contain: layout style;
+  }
+  
+  /* Optimize motion components */
+  [data-framer-component-type] {
+    contain: layout;
+    will-change: transform;
   }
 }
 
@@ -93,7 +110,6 @@
     transform: translate(0px, 0px) scale(1);
   }
 }
-
 .animate-blob {
   animation: blob 7s infinite;
 }
@@ -116,6 +132,28 @@
     }
   }
 }
-html {
-  scroll-behavior: smooth;
+
+/* Smooth scrolling optimization */
+@layer utilities {
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .gpu-accelerated {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+  }
+  
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
 }

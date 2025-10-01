@@ -96,22 +96,11 @@ export default function HeroSection() {
             >
               <span className="block text-[#1F2937]">HELLO!</span>
               <span className="block text-[#1F2937]">I AM</span>
-              <motion.span 
+              <span 
                 className="block text-[#FF7F3E] bg-gradient-to-r from-[#FF7F3E] to-[#FFB67B] bg-clip-text text-transparent"
-                animate={{ 
-                  backgroundPosition: ['0%', '100%', '0%'] 
-                }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-                style={{
-                  backgroundSize: '200% 200%'
-                }}
               >
                 DHANANJAY 
-              </motion.span>
+              </span>
             </motion.h1>
           </motion.div>
 
@@ -127,18 +116,9 @@ export default function HeroSection() {
               transition={{ delay: 0.6 }}
             >
               <span className="text-[#4B5563]">Full Stack</span>{' '}
-              <motion.span
-                className="text-[#FF7F3E]"
-                animate={{ 
-                  color: ['#FF7F3E', '#FFB67B', '#FF7F3E']
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity 
-                }}
-              >
+              <span className="text-[#FF7F3E]">
                 Developer
-              </motion.span>
+              </span>
             </motion.h2>
             <motion.h2 
               className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#1F2937]"
@@ -147,19 +127,9 @@ export default function HeroSection() {
               transition={{ delay: 0.8 }}
             >
               <span className="text-[#4B5563]">&</span>{' '}
-              <motion.span
-                className="text-[#3AB0FF]"
-                animate={{ 
-                  color: ['#3AB0FF', '#7BCFFF', '#3AB0FF']
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity,
-                  delay: 1 
-                }}
-              >
+              <span className="text-[#3AB0FF]">
                 Consultant
-              </motion.span>
+              </span>
             </motion.h2>
           </motion.div>
 
@@ -199,12 +169,7 @@ export default function HeroSection() {
 
                 View My Work
                 </a>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  →
-                </motion.div>
+                <span className="ml-2">→</span>
               </Button>
             </motion.div>
 
