@@ -62,9 +62,11 @@
 @layer base {
   * {
     @apply border-border;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground;
+    scroll-behavior: smooth;
   }
 }
 
@@ -113,4 +115,7 @@
     transform: translateY(calc(-100% - var(--gap)));
     }
   }
+}
+html {
+  scroll-behavior: smooth;
 }

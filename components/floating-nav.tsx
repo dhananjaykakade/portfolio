@@ -26,12 +26,12 @@ const FloatingNav = () => {
   }, [])
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Achievements", href: "#achievements" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/#about" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Achievements", href: "/#achievements" },
+    { name: "Experience", href: "/#experience" },
+    { name: "Contact", href: "/#contact" },
     { name: "Blog", href: "/blog" },
   ]
 

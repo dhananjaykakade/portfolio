@@ -191,10 +191,14 @@ export default function HeroSection() {
               whileTap={{ scale: 0.95 }}
             >
               <Button 
+              
                 size="lg"
                 className="bg-[#FF7F3E] hover:bg-[#FFB67B] text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
+                <a href="#projects">
+
                 View My Work
+                </a>
                 <motion.div
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
