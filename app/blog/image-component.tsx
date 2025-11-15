@@ -30,12 +30,12 @@ export function BlogImage({ src, alt, caption }: BlogImageProps) {
   }
 
   return (
-    <figure className="">
-      <div className="relative group rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900/50">
+    <figure className="my-4 md:my-8">
+      <div className="relative group rounded-lg md:rounded-xl overflow-hidden border border-[#FF7F3E]/20 bg-white shadow-sm">
         <img
           src={src}
           alt={alt}
-          className={`w-full h-auto transition-all duration-300 fit-cover cursor-zoom-in ${
+          className={`w-full h-auto max-h-[400px] md:max-h-[600px] object-contain transition-all duration-300 cursor-zoom-in ${
             isZoomed ? 'scale-150' : 'group-hover:scale-105'
           }`}
           onClick={() => setIsZoomed(!isZoomed)}
@@ -45,15 +45,15 @@ export function BlogImage({ src, alt, caption }: BlogImageProps) {
         <Button
           variant="ghost"
           size="sm"
-          className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-800/80 hover:bg-zinc-700/80 backdrop-blur-sm"
+          className="absolute top-2 right-2 md:top-4 md:right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-[#1F2937]/80 hover:bg-[#1F2937]/90 backdrop-blur-sm text-white"
           onClick={() => setIsZoomed(!isZoomed)}
         >
-          <ZoomIn className="h-4 w-4" />
+          <ZoomIn className="h-3 w-3 md:h-4 md:w-4" />
         </Button>
       </div>
       
       {caption && (
-        <figcaption className="text-center text-sm text-zinc-400 mt-3 px-4">
+        <figcaption className="text-center text-xs md:text-sm text-[#4B5563] mt-2 md:mt-3 px-2 md:px-4">
           {caption}
         </figcaption>
       )}

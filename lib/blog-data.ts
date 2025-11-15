@@ -1,10 +1,58 @@
+// Content block types for rich blog content
+export type ContentBlockType = 'paragraph' | 'heading' | 'image' | 'code' | 'quote' | 'list'
+
+export interface BaseContentBlock {
+    id: string
+    type: ContentBlockType
+    order: number
+}
+
+export interface ParagraphBlock extends BaseContentBlock {
+    type: 'paragraph'
+    content: string
+}
+
+export interface HeadingBlock extends BaseContentBlock {
+    type: 'heading'
+    level: 1 | 2 | 3 | 4 | 5 | 6
+    content: string
+}
+
+export interface ImageBlock extends BaseContentBlock {
+    type: 'image'
+    url: string
+    alt: string
+    caption?: string
+}
+
+export interface CodeBlock extends BaseContentBlock {
+    type: 'code'
+    language: string
+    code: string
+    filename?: string
+}
+
+export interface QuoteBlock extends BaseContentBlock {
+    type: 'quote'
+    content: string
+    author?: string
+}
+
+export interface ListBlock extends BaseContentBlock {
+    type: 'list'
+    ordered: boolean
+    items: string[]
+}
+
+export type ContentBlock = ParagraphBlock | HeadingBlock | ImageBlock | CodeBlock | QuoteBlock | ListBlock
 
 export interface BlogPost {
     id: string
     slug: string
     title: string
     description: string
-    content: string
+    content: string // Markdown content for backward compatibility
+    contentBlocks?: ContentBlock[] // New structured content
     image?: Images
     date: string
     readTime: number // in minutes
@@ -12,6 +60,9 @@ export interface BlogPost {
     views: number
     category: string
     excerpt?: string
+    published?: boolean // For draft management
+    author?: string
+    updated_at?: string
 }
 
 interface Images{

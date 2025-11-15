@@ -1,4 +1,4 @@
-import { supabase } from './supabase'
+import { supabase, supabaseAdmin } from './supabase'
 import { BlogPost } from '@/lib/blog-data'
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
@@ -8,6 +8,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     .from('blog_posts')
     .select('*')
     .eq('slug', slug)
+    .eq('published', true)
     .single()
 
   if (error) {
@@ -22,6 +23,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     title: post.title,
     description: post.description,
     content: post.content,
+    contentBlocks: post.content_blocks,
     image: post.image ? {
       url: post.image.url,
       alt: post.image.alt,
@@ -32,24 +34,30 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     tags: post.tags || [],
     views: post.views || 0,
     category: post.category,
-    excerpt: post.excerpt
+    excerpt: post.excerpt,
+    published: post.published,
+    author: post.author,
+    updated_at: post.updated_at
   }
 }
 
 export async function incrementBlogView(slug: string) {
-
-  
-  const { data: currentPost } = await supabase
+  // Use admin client to bypass RLS for updating views
+  const { data: currentPost } = await supabaseAdmin
     .from('blog_posts')
     .select('views')
     .eq('slug', slug)
     .single()
 
   if (currentPost) {
-    await supabase
+    const { error } = await supabaseAdmin
       .from('blog_posts')
       .update({ views: (currentPost.views || 0) + 1 })
       .eq('slug', slug)
+    
+    if (error) {
+      console.error('Error incrementing view count:', error)
+    }
   }
 }
 
@@ -58,6 +66,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
   const { data: posts, error } = await supabase
     .from('blog_posts')
     .select('*')
+    .eq('published', true)
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -72,6 +81,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     title: post.title,
     description: post.description,
     content: post.content,
+    contentBlocks: post.content_blocks,
     image: post.image ? {
       url: post.image.url,
       alt: post.image.alt,
@@ -82,6 +92,9 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     tags: post.tags || [],
     views: post.views || 0,
     category: post.category,
-    excerpt: post.excerpt
+    excerpt: post.excerpt,
+    published: post.published,
+    author: post.author,
+    updated_at: post.updated_at
   }))
 }
