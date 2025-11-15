@@ -5,26 +5,17 @@ import { useMobile } from "@/hooks/use-mobile"
 
 const experiences = [
   {
-    title: "Backend Developer Intern",
-    company: "vtex.ai, Pune (Remote)",
-    period: "Sep 2025 – Present",
-    description: [
-      "Built microservices for LMS platform using Node.js, MongoDB, Redis with deployments on Render",
-      "Implemented caching with Upstash Redis reducing API latency by 30% for frequently accessed user data",
-      "Integrated MeiliSearch for search and ZeptoMail for email services enhancing platform functionality"
-    ],
-    tech: ["Node.js", "MongoDB", "Redis", "Microservices", "Render"]
-  },
-  {
-    title: "Full Stack Developer Intern",
+    title: "Full Stack Developer (Freelancer)",
     company: "Nexolve Technologies LLP, Pune (Remote)",
-    period: "Jun 2025 – Sep 2025",
+    period: "Jun 2024 – Present",
     description: [
-      "Developed DeFi insurance platform features using Node.js, React.js, MongoDB for full-stack implementation",
-      "Integrated backend APIs with frontend, enabling real-time insurance transactions and portfolio management",
-      "Optimized database schemas and implemented OAuth authentication securing user access and data flow"
+      "Delivered 10+ full-stack projects including DeFi insurance platforms, e-commerce solutions, and SaaS applications",
+      "Developed scalable backend APIs using Node.js & Express.js, integrated with React.js frontends for seamless user experiences",
+      "Architected and optimized MongoDB & PostgreSQL databases, improving query performance by 40%",
+      "Implemented secure OAuth 2.0 and JWT authentication systems, protecting 1000+ user accounts",
+      "Collaborated with cross-functional teams using Agile methodologies, consistently delivering projects 15% ahead of schedule"
     ],
-    tech: ["Node.js", "React.js", "MongoDB", "OAuth", "DeFi"]
+    tech: ["Node.js", "React.js", "Next.js", "MongoDB", "PostgreSQL", "OAuth", "REST APIs", "Docker", "Git"]
   },
   {
     title: "MCA Student",

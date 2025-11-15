@@ -8,7 +8,7 @@ import { BlogImage } from "@/app/blog/image-component"
 import { ShareButton } from "@/app/blog/share-button"
 import { CodeBlock } from "@/app/blog/code-block"
 import { motion } from "framer-motion"
-import { BlogPost } from "@/lib/blog-data"
+import { BlogPost, ContentBlock } from "@/lib/blog-data"
 import { JSX } from "react/jsx-runtime"
 import { getBlogReviews, getAverageRating } from "@/lib/review-actions"
 import { ReviewForm } from "@/components/review-form"
@@ -17,6 +17,91 @@ import {InlineBlogLoading,BlogCardsSkeleton} from "@/app/blog/BlogLoader"
 
 interface BlogPostContentProps {
   post: BlogPost
+}
+
+// Renderer for new content block structure
+function renderContentBlocks(blocks: ContentBlock[]): JSX.Element[] {
+  return blocks
+    .sort((a, b) => a.order - b.order)
+    .map((block, index) => {
+      const key = `${block.type}-${block.id}-${index}`
+
+      switch (block.type) {
+        case 'paragraph':
+          return (
+            <p key={key} className="text-base md:text-lg text-[#4B5563] leading-relaxed mb-4 md:mb-6">
+              {block.content}
+            </p>
+          )
+
+        case 'heading':
+          const HeadingTag = `h${block.level}` as keyof JSX.IntrinsicElements
+          const headingClasses = {
+            1: "text-4xl font-bold text-[#1F2937] mt-12 mb-6 leading-tight",
+            2: "text-3xl font-bold text-[#1F2937] mt-10 mb-4 leading-tight border-b border-[#FF7F3E]/20 pb-2",
+            3: "text-2xl font-bold text-[#1F2937] mt-8 mb-3 leading-tight",
+            4: "text-xl font-bold text-[#1F2937] mt-6 mb-2 leading-tight",
+            5: "text-lg font-bold text-[#1F2937] mt-4 mb-2 leading-tight",
+            6: "text-base font-bold text-[#1F2937] mt-4 mb-2 leading-tight",
+          }
+          return (
+            <HeadingTag key={key} className={headingClasses[block.level]}>
+              {block.content}
+            </HeadingTag>
+          )
+
+        case 'image':
+          return (
+            <div key={key} className="my-8">
+              <BlogImage 
+                src={block.url} 
+                alt={block.alt}
+                caption={block.caption}
+              />
+            </div>
+          )
+
+        case 'code':
+          return (
+            <div key={key} className="my-6">
+              <CodeBlock 
+                language={block.language}
+                value={block.code}
+                filename={block.filename}
+              />
+            </div>
+          )
+
+        case 'quote':
+          return (
+            <blockquote key={key} className="border-l-4 border-[#FF7F3E] pl-6 py-2 my-6 bg-[#FFF5F0] rounded-r-lg">
+              <p className="italic text-[#1F2937] text-lg mb-2">{block.content}</p>
+              {block.author && (
+                <footer className="text-[#4B5563] text-sm">— {block.author}</footer>
+              )}
+            </blockquote>
+          )
+
+        case 'list':
+          const ListTag = block.ordered ? 'ol' : 'ul'
+          const listClass = block.ordered 
+            ? "list-decimal list-inside space-y-2 my-6 text-[#4B5563]"
+            : "list-disc list-inside space-y-2 my-6 text-[#4B5563]"
+          
+          return (
+            <ListTag key={key} className={listClass}>
+              {block.items.map((item, itemIndex) => (
+                <li key={`${key}-item-${itemIndex}`} className="leading-relaxed">
+                  {item}
+                </li>
+              ))}
+            </ListTag>
+          )
+
+        default:
+          return <div key={key}></div>
+      }
+    })
 }
 
 // Custom renderer for blog content
@@ -195,12 +280,13 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-between mb-8"
+            className="flex items-center justify-between mb-4 md:mb-8 px-4 md:px-0"
           >
             <Link href="/blog">
-              <Button variant="ghost" className="text-[#4B5563] hover:text-[#FF7F3E] hover:bg-[#FF7F3E]/5">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Blog
+              <Button variant="ghost" size="sm" className="text-[#4B5563] hover:text-[#FF7F3E] hover:bg-[#FF7F3E]/5">
+                <ArrowLeft className="h-4 w-4 mr-1 md:mr-2" />
+                <span className="hidden sm:inline">Back to Blog</span>
+                <span className="sm:hidden">Back</span>
               </Button>
             </Link>
             
@@ -222,11 +308,11 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
               <span className="text-sm text-[#4B5563]">{post.category}</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-[#1F2937] to-[#4B5563] bg-clip-text text-transparent">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight bg-gradient-to-r from-[#1F2937] to-[#4B5563] bg-clip-text text-transparent px-4 md:px-0">
               {post.title}
             </h1>
             
-            <p className="text-xl text-[#4B5563] mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-xl text-[#4B5563] mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
               {post.description}
             </p>
             
@@ -269,7 +355,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-12 rounded-2xl overflow-hidden border border-[#FF7F3E]/20 bg-white shadow-lg"
+              className="mb-8 md:mb-12 rounded-xl md:rounded-2xl overflow-hidden border border-[#FF7F3E]/20 bg-white shadow-lg"
             >
               <BlogImage 
                 src={post.image.url} 
@@ -284,10 +370,14 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-white rounded-2xl border border-[#FF7F3E]/10 p-8 md:p-12 shadow-sm"
+            className="bg-white rounded-xl md:rounded-2xl border border-[#FF7F3E]/10 p-4 md:p-8 lg:p-12 shadow-sm"
           >
-            <div className="space-y-8">
-              {renderBlogContent(post.content)}
+            <div className="space-y-4 md:space-y-8">
+              {/* Render content blocks if available, otherwise render markdown */}
+              {post.contentBlocks && post.contentBlocks.length > 0 
+                ? renderContentBlocks(post.contentBlocks)
+                : renderBlogContent(post.content)
+              }
             </div>
           </motion.div>
 

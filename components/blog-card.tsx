@@ -53,11 +53,15 @@ export function BlogCard({ post }: BlogCardProps) {
           <div className="flex items-center gap-4 text-sm text-[#4B5563] mb-4">
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4" />
-              {post.date}
+              {new Date(post.date).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+              })}
             </div>
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4" />
-              {post.readTime}
+              {post.readTime} min
             </div>
           </div>
 
