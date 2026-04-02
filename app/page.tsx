@@ -25,6 +25,7 @@ import { motion } from "framer-motion";
 import { Phone, Download, Calendar } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import BlogSection from "@/components/blogSection";
+import ChatCTA from "@/components/ChatCTA";
 
 export default function Portfolio() {
   return (
@@ -51,6 +52,9 @@ export default function Portfolio() {
 
       {/* Blog Section */}
       <BlogSection />
+
+      {/* Chat CTA Section */}
+      <ChatCTA />
 
       {/* Contact Section */}
       <section
