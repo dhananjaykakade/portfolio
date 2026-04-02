@@ -25,6 +25,7 @@ import { motion } from "framer-motion";
 import { Phone, Download, Calendar } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import BlogSection from "@/components/blogSection";
+import ChatCTA from "@/components/ChatCTA";
 
 export default function Portfolio() {
   return (
@@ -44,13 +45,16 @@ export default function Portfolio() {
       <ProjectsSection />
 
       {/* Achievements Section */}
-      <AchievementsSection />
+      {/* <AchievementsSection /> */}
 
       {/* Experience Section */}
       <WorkexperienceSection />
 
       {/* Blog Section */}
       <BlogSection />
+
+      {/* Chat CTA Section */}
+      <ChatCTA />
 
       {/* Contact Section */}
       <section
@@ -225,7 +229,7 @@ export default function Portfolio() {
             viewport={{ once: true }}
           >
             <motion.a
-              href="/resume.pdf"
+              href="/Dhananjaykakade_95552935559.pdf"
               download
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#1F2937] text-white font-medium rounded-xl hover:bg-[#374151] transition-colors"
               whileHover={{ scale: 1.05 }}
