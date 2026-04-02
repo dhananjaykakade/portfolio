@@ -257,50 +257,6 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* Tech Stack Progress */}
-        <motion.div
-          className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-xl font-bold text-[#1F2937] mb-6 flex items-center gap-2">
-            <Code2 className="w-5 h-5 text-[#FF7F3E]" />
-            Tech Proficiency
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-            {techStack.map((tech, index) => (
-              <motion.div
-                key={tech.name}
-                className="group"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm font-medium text-[#1F2937]">{tech.name}</span>
-                  <span className="text-xs text-[#6B7280]">{tech.level}%</span>
-                </div>
-                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full rounded-full"
-                    style={{ 
-                      background: index % 2 === 0 
-                        ? 'linear-gradient(90deg, #FF7F3E, #FFB67B)' 
-                        : 'linear-gradient(90deg, #3AB0FF, #7DD3FC)'
-                    }}
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${tech.level}%` }}
-                    transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
-                    viewport={{ once: true }}
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* CTA Section */}
         <motion.div

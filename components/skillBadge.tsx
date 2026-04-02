@@ -20,6 +20,7 @@ import {
   SiNginx,
   SiJest,
   SiPrisma,
+  SiGo,
 } from "react-icons/si";
 import {
   Database,
@@ -33,334 +34,427 @@ import {
   Layers,
   Palette,
   Settings,
+  Zap,
+  TrendingUp,
+  Star,
 } from "lucide-react";
 
-const CustomMarquee = ({ children, reverse = false }: { children: React.ReactNode; reverse?: boolean }) => {
-  return (
-    <div className="relative overflow-hidden">
-      {/* Left Gradient Fade */}
-      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-12 lg:w-16 bg-gradient-to-r from-[#FFF5F0] to-transparent z-10 pointer-events-none" />
+// Bento Card Component
+const BentoCard = ({
+  children,
+  className = "",
+  size = "default",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  size?: "small" | "default" | "large" | "wide" | "tall";
+  delay?: number;
+}) => {
+  const sizeClasses = {
+    small: "col-span-1 row-span-1",
+    default: "col-span-1 row-span-1 md:col-span-1 md:row-span-1",
+    large: "col-span-2 row-span-2",
+    wide: "col-span-2 row-span-1",
+    tall: "col-span-1 row-span-2",
+  };
 
-      {/* Right Gradient Fade */}
-      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-12 lg:w-16 bg-gradient-to-l from-[#FFF5F0] to-transparent z-10 pointer-events-none" />
-
-      <motion.div
-        className="flex gap-3 sm:gap-4 lg:gap-6 py-2 sm:py-3"
-        animate={{
-          x: reverse ? ["0%", "-50%"] : ["-50%", "0%"],
-        }}
-        transition={{
-          x: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: 15,
-            ease: "linear",
-          },
-        }}
-      >
-        <div className="flex gap-3 sm:gap-4 lg:gap-6">{children}</div>
-        <div className="flex gap-3 sm:gap-4 lg:gap-6">{children}</div>
-      </motion.div>
-    </div>
-  );
-};
-
-const TechnologyIcon = ({ icon: Icon, name, color }: { icon: any; name: string; color: string }) => {
   return (
     <motion.div
-      className="group relative flex flex-col items-center justify-center bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 shadow-md border border-[#FF7F3E]/10 hover:shadow-xl hover:border-[#FF7F3E]/30 transition-all duration-300 min-w-[70px] sm:min-w-[85px] md:min-w-[100px] flex-shrink-0"
-      whileHover={{ y: -4, scale: 1.05 }}
-      transition={{ duration: 0.3 }}
+      className={`group relative bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:border-[#FF7F3E]/20 transition-all duration-500 overflow-hidden ${sizeClasses[size]} ${className}`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5 }}
     >
-      {/* Hover gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FF7F3E]/5 to-[#3AB0FF]/5 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
-      <div
-        className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg sm:rounded-xl flex items-center justify-center mb-2 transition-all duration-300 group-hover:scale-110"
-        style={{
-          backgroundColor: `${color}10`,
-          border: `1.5px solid ${color}25`,
-        }}
-      >
-        <Icon
-          className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 transition-all duration-300"
-          style={{ color }}
-        />
-      </div>
-      
-      <span className="relative text-[10px] sm:text-xs md:text-sm font-medium text-[#1F2937] group-hover:text-[#FF7F3E] transition-colors duration-300 text-center">
-        {name}
-      </span>
-
-      {/* Tooltip on hover (desktop only) */}
-      <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#1F2937] text-white px-3 py-1.5 rounded-lg text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none hidden sm:block">
-        {name}
-        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1F2937] rotate-45" />
-      </div>
+      {/* Hover gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FF7F3E]/5 via-transparent to-[#3AB0FF]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative z-10">{children}</div>
     </motion.div>
   );
 };
 
-const CategoryTab = ({ 
-  icon: Icon, 
-  label, 
-  isActive, 
-  onClick 
-}: { 
-  icon: any; 
-  label: string; 
-  isActive: boolean; 
-  onClick: () => void;
+// Tech Icon Component
+const TechIcon = ({
+  icon: Icon,
+  name,
+  color,
+  size = "default",
+}: {
+  icon: any;
+  name: string;
+  color: string;
+  size?: "small" | "default" | "large";
+}) => {
+  const sizeClasses = {
+    small: "w-8 h-8 md:w-10 md:h-10",
+    default: "w-10 h-10 md:w-12 md:h-12",
+    large: "w-12 h-12 md:w-16 md:h-16",
+  };
+
+  const iconSizes = {
+    small: "w-4 h-4 md:w-5 md:h-5",
+    default: "w-5 h-5 md:w-6 md:h-6",
+    large: "w-6 h-6 md:w-8 md:h-8",
+  };
+
+  return (
+    <motion.div
+      className="flex flex-col items-center gap-1.5 md:gap-2"
+      whileHover={{ scale: 1.1 }}
+      transition={{ type: "spring", stiffness: 400 }}
+    >
+      <div
+        className={`${sizeClasses[size]} rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:shadow-lg`}
+        style={{
+          backgroundColor: `${color}15`,
+          border: `1.5px solid ${color}30`,
+        }}
+      >
+        <Icon className={iconSizes[size]} style={{ color }} />
+      </div>
+      <span className="text-[10px] md:text-xs font-medium text-[#4B5563] group-hover:text-[#1F2937] transition-colors text-center">
+        {name}
+      </span>
+    </motion.div>
+  );
+};
+
+// Skill Progress Component
+const SkillProgress = ({
+  name,
+  level,
+  color,
+}: {
+  name: string;
+  level: number;
+  color: string;
 }) => {
   return (
-    <motion.button
-      onClick={onClick}
-      className={`flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg sm:rounded-xl font-medium text-xs sm:text-sm md:text-base transition-all duration-300 ${
-        isActive
-          ? "bg-gradient-to-r from-[#FF7F3E] to-[#FF9F5A] text-white shadow-lg"
-          : "bg-white text-[#1F2937] border border-[#FF7F3E]/20 hover:border-[#FF7F3E]/40"
-      }`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
-      <span className="hidden sm:inline">{label}</span>
-      <span className="sm:hidden">{label.split(' ')[0]}</span>
-    </motion.button>
+    <div className="space-y-1.5 md:space-y-2">
+      <div className="flex justify-between items-center">
+        <span className="text-xs md:text-sm font-medium text-[#1F2937]">{name}</span>
+        <span className="text-[10px] md:text-xs text-[#6B7280]">{level}%</span>
+      </div>
+      <div className="h-1.5 md:h-2 bg-gray-100 rounded-full overflow-hidden">
+        <motion.div
+          className="h-full rounded-full"
+          style={{ background: `linear-gradient(90deg, ${color}, ${color}80)` }}
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }}
+        />
+      </div>
+    </div>
   );
 };
 
 export default function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
-  const categories = [
-    { id: "all", icon: Layers, label: "All Stack" },
-    { id: "frontend", icon: Palette, label: "Frontend" },
-    { id: "backend", icon: Server, label: "Backend" },
-    { id: "database", icon: Database, label: "Database" },
-    { id: "devops", icon: Settings, label: "DevOps" },
+  const primaryTech = [
+    { icon: SiNodedotjs, name: "Node.js", color: "#339933", level: 95 },
+    { icon: SiTypescript, name: "TypeScript", color: "#3178C6", level: 90 },
+    { icon: SiMongodb, name: "MongoDB", color: "#47A248", level: 88 },
+    { icon: SiReact, name: "React", color: "#61DAFB", level: 85 },
   ];
 
-  const technologies = {
-    frontend: [
-      { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
-      { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
-      { icon: SiReact, name: "React", color: "#61DAFB" },
-      { icon: SiNextdotjs, name: "Next.js", color: "#000000" },
-      { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
-      { icon: SiRedux, name: "Redux", color: "#764ABC" },
-    ],
-    backend: [
-      { icon: SiNodedotjs, name: "Node.js", color: "#339933" },
-      { icon: SiExpress, name: "Express", color: "#000000" },
-      { icon: Server, name: "REST API", color: "#FF7F3E" },
-      { icon: SiPython, name: "Python", color: "#3776AB" },
-      { icon: Cloud, name: "Microservices", color: "#3AB0FF" },
-      { icon: Workflow, name: "System Design", color: "#FF7F3E" },
-    ],
-    database: [
-      { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
-      { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
-      { icon: SiRedis, name: "Redis", color: "#DC382D" },
-      { icon: SiPrisma, name: "Prisma", color: "#2D3748" },
-      { icon: Database, name: "RDBMS", color: "#FF7F3E" },
-    ],
-    devops: [
-      { icon: SiDocker, name: "Docker", color: "#2496ED" },
-      { icon: SiGit, name: "Git", color: "#F05032" },
-      { icon: SiNginx, name: "Nginx", color: "#009639" },
-      { icon: SiJest, name: "Jest", color: "#C21325" },
-      { icon: Terminal, name: "Linux", color: "#FCC624" },
-      { icon: GitBranch, name: "CI/CD", color: "#FF7F3E" },
-    ],
-    concepts: [
-      { icon: Cpu, name: "OOP", color: "#FF7F3E" },
-      { icon: Code2, name: "DSA", color: "#3AB0FF" },
-    ],
-  };
-
-  const allTechnologies = [
-    ...technologies.frontend,
-    ...technologies.backend,
-    ...technologies.database,
-    ...technologies.devops,
-    ...technologies.concepts,
+  const frontendTech = [
+    { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
+    { icon: SiReact, name: "React", color: "#61DAFB" },
+    { icon: SiNextdotjs, name: "Next.js", color: "#000000" },
+    { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
+    { icon: SiRedux, name: "Redux", color: "#764ABC" },
   ];
 
-  const getDisplayedTechnologies = () => {
-    if (activeCategory === "all") return allTechnologies;
-    return technologies[activeCategory as keyof typeof technologies] || [];
-  };
+  const backendTech = [
+    { icon: SiNodedotjs, name: "Node.js", color: "#339933" },
+    { icon: SiExpress, name: "Express", color: "#000000" },
+    { icon: SiPython, name: "Python", color: "#3776AB" },
+    { icon: SiGo, name: "Golang", color: "#00ADD8" },
+    { icon: Server, name: "REST API", color: "#FF7F3E" },
+  ];
 
-  const displayedTechs = getDisplayedTechnologies();
-  
-  // Duplicate technologies for seamless loop
-  const duplicatedTechs = [...displayedTechs, ...displayedTechs, ...displayedTechs];
+  const databaseTech = [
+    { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
+    { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
+    { icon: SiRedis, name: "Redis", color: "#DC382D" },
+    { icon: SiPrisma, name: "Prisma", color: "#2D3748" },
+  ];
+
+  const devopsTech = [
+    { icon: SiDocker, name: "Docker", color: "#2496ED" },
+    { icon: SiGit, name: "Git", color: "#F05032" },
+    { icon: SiNginx, name: "Nginx", color: "#009639" },
+    { icon: Terminal, name: "Linux", color: "#FCC624" },
+  ];
 
   return (
     <section
       id="skills"
-      className="py-16 sm:py-24 md:py-32 relative bg-[#FFF5F0] overflow-hidden"
+      className="py-16 md:py-24 lg:py-32 relative bg-[#F9F9F9] overflow-hidden"
     >
-      {/* Animated Background Elements */}
+      {/* Animated Background */}
       <div className="absolute inset-0 z-0">
-        {/* Floating particles */}
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#FF7F3E]/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.2, 0.8, 0.2],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-
-        {/* Large gradient blobs */}
         <motion.div
-          className="absolute top-10 sm:top-20 left-10 sm:left-20 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[#FF7F3E] rounded-full mix-blend-multiply filter blur-3xl opacity-10"
+          className="absolute top-20 right-20 w-48 md:w-72 lg:w-96 h-48 md:h-72 lg:h-96 bg-gradient-to-br from-[#FF7F3E]/10 to-transparent rounded-full blur-3xl"
           animate={{
-            scale: [1, 1.3, 1],
-            x: [0, 25, 0],
-            y: [0, -25, 0],
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
           }}
           transition={{
-            duration: 8,
+            duration: 20,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "linear",
           }}
         />
         <motion.div
-          className="absolute bottom-10 sm:bottom-20 right-10 sm:right-20 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[#3AB0FF] rounded-full mix-blend-multiply filter blur-3xl opacity-10"
+          className="absolute bottom-20 left-20 w-48 md:w-72 lg:w-96 h-48 md:h-72 lg:h-96 bg-gradient-to-tr from-[#3AB0FF]/10 to-transparent rounded-full blur-3xl"
           animate={{
-            scale: [1.3, 1, 1.3],
-            x: [0, -25, 0],
-            y: [0, 25, 0],
+            scale: [1.2, 1, 1.2],
+            rotate: [0, -90, 0],
           }}
           transition={{
-            duration: 10,
+            duration: 25,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "linear",
+          }}
+        />
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage:
+              "radial-gradient(#1F2937 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
           }}
         />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6">
-        {/* Section Heading */}
+      <div className="container relative z-10 mx-auto px-4 md:px-6">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-8 sm:mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <motion.div
-            className="inline-block mb-3 sm:mb-4"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-[#FF7F3E]/10 to-[#3AB0FF]/10 border border-[#FF7F3E]/20 rounded-full text-xs sm:text-sm font-semibold text-[#FF7F3E]">
-              Technologies & Tools
-            </span>
-          </motion.div>
-          
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1F2937] mb-3 sm:mb-4 leading-tight">
-            My Tech Stack
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-[#4B5563] max-w-2xl mx-auto px-4">
-            Building modern, scalable solutions with cutting-edge technologies
-          </p>
-        </motion.div>
-
-        {/* Category Tabs */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          {categories.map((category) => (
-            <CategoryTab
-              key={category.id}
-              icon={category.icon}
-              label={category.label}
-              isActive={activeCategory === category.id}
-              onClick={() => setActiveCategory(category.id)}
-            />
-          ))}
-        </motion.div>
-
-        {/* Tech Stack Marquee */}
-        <motion.div
+          className="text-center mb-10 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          key={activeCategory}
         >
-          <CustomMarquee>
-            {duplicatedTechs.map((tech, index) => (
-              <TechnologyIcon
-                key={`tech-${index}`}
-                icon={tech.icon}
-                name={tech.name}
-                color={tech.color}
-              />
-            ))}
-          </CustomMarquee>
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-[#FF7F3E]/10 text-[#FF7F3E] text-xs md:text-sm font-medium mb-4 md:mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <Code2 className="w-3.5 h-3.5 md:w-4 md:h-4" />
+            Technologies & Tools
+          </motion.div>
+
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#1F2937] mb-3 md:mb-4">
+            My Tech Stack
+          </h2>
+          <p className="text-sm md:text-base lg:text-lg text-[#4B5563] max-w-2xl mx-auto">
+            Building modern, scalable solutions with cutting-edge technologies
+          </p>
         </motion.div>
 
-        {/* Stats Section */}
+        {/* Bento Grid - Mobile Optimized */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 lg:gap-6 auto-rows-[minmax(100px,auto)] md:auto-rows-[minmax(120px,auto)]">
+          
+          {/* Hero Card - Primary Skills */}
+          <BentoCard size="large" className="col-span-2 row-span-2" delay={0}>
+            <div className="h-full flex flex-col">
+              <div className="flex items-center gap-2 mb-3 md:mb-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-[#FF7F3E] to-[#FFB67B] flex items-center justify-center">
+                  <Zap className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-base md:text-lg font-bold text-[#1F2937]">Core Stack</h3>
+                  <p className="text-[10px] md:text-xs text-[#6B7280]">Primary technologies</p>
+                </div>
+              </div>
+              
+              <div className="flex-1 space-y-2 md:space-y-3">
+                {primaryTech.map((tech) => (
+                  <SkillProgress
+                    key={tech.name}
+                    name={tech.name}
+                    level={tech.level}
+                    color={tech.color}
+                  />
+                ))}
+              </div>
+            </div>
+          </BentoCard>
+
+          {/* Frontend Card */}
+          <BentoCard className="col-span-2 row-span-1 md:col-span-2 md:row-span-1" delay={0.1}>
+            <div className="flex items-center gap-2 mb-3 md:mb-4">
+              <Palette className="w-4 h-4 md:w-5 md:h-5 text-[#3AB0FF]" />
+              <h3 className="text-sm md:text-base font-bold text-[#1F2937]">Frontend</h3>
+            </div>
+            <div className="flex flex-wrap gap-2 md:gap-3">
+              {frontendTech.map((tech) => (
+                <TechIcon
+                  key={tech.name}
+                  icon={tech.icon}
+                  name={tech.name}
+                  color={tech.color}
+                  size="small"
+                />
+              ))}
+            </div>
+          </BentoCard>
+
+          {/* Stats Card */}
+          <BentoCard className="col-span-1 row-span-1 md:col-span-1 md:row-span-1" delay={0.15}>
+            <div className="h-full flex flex-col items-center justify-center text-center">
+              <motion.div
+                className="text-2xl md:text-3xl lg:text-4xl font-black bg-gradient-to-r from-[#FF7F3E] to-[#FFB67B] bg-clip-text text-transparent"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ type: "spring", delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                20+
+              </motion.div>
+              <p className="text-[10px] md:text-xs text-[#6B7280] mt-1">Technologies</p>
+            </div>
+          </BentoCard>
+
+          {/* Experience Card */}
+          <BentoCard className="col-span-1 row-span-1 md:col-span-1 md:row-span-1" delay={0.2}>
+            <div className="h-full flex flex-col items-center justify-center text-center">
+              <motion.div
+                className="text-2xl md:text-3xl lg:text-4xl font-black bg-gradient-to-r from-[#3AB0FF] to-[#7DD3FC] bg-clip-text text-transparent"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ type: "spring", delay: 0.35 }}
+                viewport={{ once: true }}
+              >
+                1+
+              </motion.div>
+              <p className="text-[10px] md:text-xs text-[#6B7280] mt-1">Years Exp</p>
+            </div>
+          </BentoCard>
+
+          {/* Backend Card */}
+          <BentoCard className="col-span-2 row-span-1 md:col-span-2 md:row-span-1" delay={0.25}>
+            <div className="flex items-center gap-2 mb-3 md:mb-4">
+              <Server className="w-4 h-4 md:w-5 md:h-5 text-[#FF7F3E]" />
+              <h3 className="text-sm md:text-base font-bold text-[#1F2937]">Backend</h3>
+              <span className="ml-auto px-2 py-0.5 bg-[#FF7F3E]/10 rounded-full text-[10px] md:text-xs font-medium text-[#FF7F3E]">
+                Specialty
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-2 md:gap-3">
+              {backendTech.map((tech) => (
+                <TechIcon
+                  key={tech.name}
+                  icon={tech.icon}
+                  name={tech.name}
+                  color={tech.color}
+                  size="small"
+                />
+              ))}
+            </div>
+          </BentoCard>
+
+          {/* Database Card */}
+          <BentoCard className="col-span-2 row-span-1 md:col-span-2 md:row-span-1" delay={0.3}>
+            <div className="flex items-center gap-2 mb-3 md:mb-4">
+              <Database className="w-4 h-4 md:w-5 md:h-5 text-[#47A248]" />
+              <h3 className="text-sm md:text-base font-bold text-[#1F2937]">Database</h3>
+            </div>
+            <div className="flex flex-wrap gap-2 md:gap-3">
+              {databaseTech.map((tech) => (
+                <TechIcon
+                  key={tech.name}
+                  icon={tech.icon}
+                  name={tech.name}
+                  color={tech.color}
+                  size="small"
+                />
+              ))}
+            </div>
+          </BentoCard>
+
+          {/* DevOps Card */}
+          <BentoCard className="col-span-2 row-span-1 md:col-span-2 md:row-span-1" delay={0.35}>
+            <div className="flex items-center gap-2 mb-3 md:mb-4">
+              <Settings className="w-4 h-4 md:w-5 md:h-5 text-[#2496ED]" />
+              <h3 className="text-sm md:text-base font-bold text-[#1F2937]">DevOps</h3>
+            </div>
+            <div className="flex flex-wrap gap-2 md:gap-3">
+              {devopsTech.map((tech) => (
+                <TechIcon
+                  key={tech.name}
+                  icon={tech.icon}
+                  name={tech.name}
+                  color={tech.color}
+                  size="small"
+                />
+              ))}
+            </div>
+          </BentoCard>
+
+          {/* Learning Card */}
+          <BentoCard className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 bg-gradient-to-br from-[#FFF5F0] to-white" delay={0.4}>
+            <div className="flex items-center gap-2 md:gap-3">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-[#FF7F3E]/20 to-[#3AB0FF]/20 flex items-center justify-center">
+                <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-[#FF7F3E]" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-sm md:text-base font-bold text-[#1F2937]">Always Learning</h3>
+                <p className="text-[10px] md:text-xs text-[#6B7280]">
+                  Currently exploring Kubernetes, GraphQL & System Design
+                </p>
+              </div>
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Star className="w-5 h-5 md:w-6 md:h-6 text-[#FFB67B]" />
+              </motion.div>
+            </div>
+          </BentoCard>
+        </div>
+
+        {/* Bottom Stats Row - Mobile Optimized */}
         <motion.div
-          className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+          className="mt-8 md:mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
         >
           {[
-            { label: "Technologies", value: `${allTechnologies.length}+` },
-            { label: "Years Exp", value: "1+" },
-            { label: "Projects", value: "15+" },
-            { label: "Happy Clients", value: "5+" },
+            { label: "Projects Built", value: "15+", color: "#FF7F3E" },
+            { label: "Happy Clients", value: "5+", color: "#3AB0FF" },
+            { label: "APIs Created", value: "30+", color: "#47A248" },
+            { label: "Coffee Cups", value: "∞", color: "#8B4513" },
           ].map((stat, index) => (
             <motion.div
-              key={index}
-              className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md border border-[#FF7F3E]/10 hover:shadow-xl hover:border-[#FF7F3E]/30 transition-all duration-300"
-              whileHover={{ y: -4 }}
+              key={stat.label}
+              className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#FF7F3E]/20 transition-all duration-300 text-center"
+              whileHover={{ y: -5 }}
             >
-              <div className="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-[#FF7F3E] to-[#3AB0FF] bg-clip-text text-transparent mb-1 sm:mb-2">
+              <div
+                className="text-xl md:text-2xl lg:text-3xl font-black mb-1"
+                style={{ color: stat.color }}
+              >
                 {stat.value}
               </div>
-              <div className="text-xs sm:text-sm md:text-base text-[#4B5563] font-medium">
+              <div className="text-[10px] md:text-xs lg:text-sm text-[#6B7280] font-medium">
                 {stat.label}
               </div>
             </motion.div>
           ))}
         </motion.div>
       </div>
-
-      {/* Section Bottom Border */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FF7F3E]/30 to-transparent"
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        transition={{ duration: 1, delay: 0.6 }}
-        viewport={{ once: true }}
-      />
     </section>
   );
 }
