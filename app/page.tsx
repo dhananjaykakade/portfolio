@@ -44,7 +44,7 @@ export default function Portfolio() {
       <ProjectsSection />
 
       {/* Achievements Section */}
-      <AchievementsSection />
+      {/* <AchievementsSection /> */}
 
       {/* Experience Section */}
       <WorkexperienceSection />
