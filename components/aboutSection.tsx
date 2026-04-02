@@ -212,7 +212,7 @@ export default function AboutSection() {
                 >
                   <Button className="bg-[#FF7F3E] hover:bg-[#FFB67B] text-white px-8 py-3 rounded-full font-semibold shadow-lg transition-all duration-300">
                     <Download className="w-4 h-4 mr-2" />
-                    <a href="/updatedResume.pdf" download>
+                    <a href="/Dhananjaykakade_95552935559.pdf" download>
                       Download Resume
                     </a>
                   </Button>

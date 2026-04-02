@@ -225,7 +225,7 @@ export default function Portfolio() {
             viewport={{ once: true }}
           >
             <motion.a
-              href="/resume.pdf"
+              href="/Dhananjaykakade_95552935559.pdf"
               download
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#1F2937] text-white font-medium rounded-xl hover:bg-[#374151] transition-colors"
               whileHover={{ scale: 1.05 }}

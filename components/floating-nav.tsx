@@ -141,7 +141,7 @@ const FloatingNav = () => {
                   className="rounded-full bg-gradient-to-r from-[#FF7F3E] to-[#FFB67B] hover:from-[#FF7F3E] hover:to-[#FF9F5A] text-white font-medium px-6 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  <a href="/dhananjay_kakade_sde.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="/Dhananjaykakade_95552935559.pdf" target="_blank" rel="noopener noreferrer">
                     Resume
                   </a>
                 </Button>
@@ -235,7 +235,7 @@ const FloatingNav = () => {
                         className="w-full rounded-xl bg-gradient-to-r from-[#FF7F3E] to-[#FFB67B] hover:from-[#FF7F3E] hover:to-[#FF9F5A] text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         <Download className="w-5 h-5 mr-2" />
-                        <a href="/dhananjay_kakade_sde.pdf" target="_blank" rel="noopener noreferrer">
+                        <a href="/Dhananjaykakade_95552935559.pdf" target="_blank" rel="noopener noreferrer">
                           Download Resume
                         </a>
                       </Button>

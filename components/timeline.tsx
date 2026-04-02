@@ -5,25 +5,34 @@ import { useMobile } from "@/hooks/use-mobile"
 
 const experiences = [
   {
-    title: "Full Stack Developer (Freelancer)",
-    company: "Nexolve Technologies LLP, Pune (Remote)",
+    title: "Backend Developer Intern",
+    company: "vtex.ai, Pune (Remote)",
+    period: "Sep 2025 – Nov 2025",
+    description: [
+      "Built microservices for LMS platform using Node.js, MongoDB, Redis with deployments on Render",
+      "Implemented caching with Upstash Redis reducing API latency by 30% for frequently accessed user data",
+      "Integrated MeiliSearch for search and ZeptoMail for email services enhancing platform functionality"
+    ],
+    tech: ["Node.js", "MongoDB", "Redis", "Upstash", "MeiliSearch", "ZeptoMail", "Render", "Microservices"]
+  },
+  {
+    title: "Freelance Full Stack Developer",
+    company: "Self-Employed, Remote",
     period: "Jun 2024 – Present",
     description: [
-      "Delivered 10+ full-stack projects including DeFi insurance platforms, e-commerce solutions, and SaaS applications",
-      "Developed scalable backend APIs using Node.js & Express.js, integrated with React.js frontends for seamless user experiences",
-      "Architected and optimized MongoDB & PostgreSQL databases, improving query performance by 40%",
-      "Implemented secure OAuth 2.0 and JWT authentication systems, protecting 1000+ user accounts",
-      "Collaborated with cross-functional teams using Agile methodologies, consistently delivering projects 15% ahead of schedule"
+      "Developed an IoT-based Water Tank Monitoring System for GK Mirai Society, PCMC using ESP32 and Ultrasonic Sensors, enabling real-time water level tracking",
+      "Built backend and dashboard using Next.js (API routes), Node.js, MongoDB, and TypeScript, enabling automated alerts and reducing manual monitoring by 80%",
+      "Collaborated with Artwala Foundation to develop and maintain a web platform, improving digital presence and operational workflows",
+      "Designed and deployed scalable full-stack solutions using Next.js, Express.js, TypeScript, and REST APIs, ensuring high performance, reliability, and maintainability"
     ],
-    tech: ["Node.js", "React.js", "Next.js", "MongoDB", "PostgreSQL", "OAuth", "REST APIs", "Docker", "Git"]
+    tech: ["Next.js", "Node.js", "MongoDB", "TypeScript", "Express.js", "REST APIs", "ESP32", "IoT"]
   },
   {
     title: "MCA Student",
     company: "MES, Institute of Management & Career Courses (IMCC), Pune",
-    period: "Sept 2024 – Ongoing",
+    period: "Sept 2024 – May 2026",
     description: [
-      "Applied Agile methodologies (Scrum) in academic projects, using Jira to manage sprints, backlogs, and evaluations",
-      "Leading 4-member team in delivering iterative improvements through structured project management"
+      "Led sprint planning and task tracking for a 4-member team using Agile (Scrum) and Jira, improving iteration speed and ensuring consistent on-time project delivery"
     ],
     tech: ["Agile", "Scrum", "Jira", "Project Management"]
   },
@@ -32,8 +41,7 @@ const experiences = [
     company: "Modern College, Pune",
     period: "Jul 2021 – May 2024",
     description: [
-      "Ranked in the top 5% of the class out of 120+ students based on academic performance",
-      "Built strong foundation in computer science fundamentals and software development principles"
+      "Ranked in the top 5% of the class out of 120+ students based on academic performance"
     ],
     tech: ["Data Structures", "Algorithms", "Software Engineering"]
   }
