@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-import { qstash } from "@/lib/qstash"
+import { sendContactEmails } from "@/lib/email"
 
 export async function POST(request: Request) {
   try {
@@ -11,14 +11,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "All fields are required." }, { status: 400 })
     }
 
-
-const url = `${process.env.APP_URL}/api/emailWorker`;
-
-await qstash.publishJSON({
-  url,
-  body: { name, email, subject, message },
-});
-
+    await sendContactEmails({ name, email, subject, message })
 
     return NextResponse.json({ message: "Message sent successfully!" }, { status: 200 })
   } catch (error) {
