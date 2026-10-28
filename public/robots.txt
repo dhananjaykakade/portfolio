@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://dhananjaykakade.tech
+Host: https://dhananjayk.in
 
 # Sitemaps
-Sitemap: https://dhananjaykakade.tech/sitemap.xml
+Sitemap: https://dhananjayk.in/sitemap.xml

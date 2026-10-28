@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "Prisma",
     "Docker",
     "Software Portfolio",
-    "dhananjaykakade.tech",
+    "dhananjayk.in",
     "Software Engineer",
     "Full Stack Developer",
     "Microservices",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     "Software Engineer About Me",
     "Software Engineer Contact",
     "dhananjaykakade",
-    "dhananjaykakade.tech",
+    "dhananjayk.in",
     "Dhananjay Kakade Portfolio",
     "Dhananjay Kakade Resume",
     "Dhananjay Kakade CV",
@@ -113,7 +113,7 @@ export const metadata: Metadata = {
     "",
   ],
   alternates: {
-    canonical: "https://dhananjaykakade.tech",
+    canonical: "https://dhananjayk.in",
   },
   icons: {
     icon: "/favicon.ico", // Link to the new favicon
@@ -123,7 +123,7 @@ export const metadata: Metadata = {
       "Dhananjay Kakade — Software Engineer (Node.js, React, Prisma, Docker)",
     description:
       "Portfolio of Dhananjay Kakade, Software Development Engineer skilled in backend engineering, microservices, and AI-integrated apps.",
-    url: "https://dhananjaykakade.tech",
+    url: "https://dhananjayk.in",
     siteName: "Dhananjay Kakade",
     images: [
       {
@@ -153,7 +153,7 @@ export const metadata: Metadata = {
 authors: [
     {
       name: "Dhananjay Kakade",
-      url: "https://dhananjaykakade.tech",
+      url: "https://dhananjayk.in",
     },
   ],
   creator: "Dhananjay Kakade",
@@ -193,8 +193,8 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "Person",
       name: "Dhananjay Kakade",
-      url: "https://dhananjaykakade.tech",
-      image: "https://dhananjaykakade.tech/dk.png",
+      url: "https://dhananjayk.in",
+      image: "https://dhananjayk.in/dk.png",
       sameAs: [
         "https://github.com/dhananjaykakade",
         "https://www.linkedin.com/in/dhananjay-kakade-657087294/",
