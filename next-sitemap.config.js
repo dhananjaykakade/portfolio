@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-  siteUrl: 'https://dhananjaykakade.tech',
+  siteUrl: 'https://dhananjayk.in',
   generateRobotsTxt: true,
   sitemapSize: 7000,
   changefreq: 'weekly',
@@ -15,7 +15,7 @@ const config = {
     ],
     additionalSitemaps: [
       // Add additional sitemap links here if needed
-      // 'https://dhananjaykakade.tech/blog-sitemap.xml',
+      // 'https://dhananjayk.in/blog-sitemap.xml',
     ],
   },
 };
