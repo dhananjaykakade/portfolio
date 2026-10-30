@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster"; // Import Toaster for toasts
 import Script from "next/script";
 import { Footer } from "@/components/Footer"
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import FloatingNav from "@/components/floating-nav"; // Corrected import to default
 
@@ -221,6 +222,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <Toaster /> {/* Add Toaster component */}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
